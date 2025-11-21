@@ -44,8 +44,8 @@ export interface ContactInfo {
   address: string;
   facebook: string;
   youtube: string;
-  instagram: string;
-  linkedin: string;
+  zalo: string; // Added Zalo
+  // Removed instagram & linkedin
 }
 
 export interface ContentState {

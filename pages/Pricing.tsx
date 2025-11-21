@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PageHero, Section } from '../components/Section';
 import { PricingPlan } from '../types';
@@ -41,29 +42,29 @@ export const Pricing: React.FC = () => {
       <PageHero title="Gói dịch vụ tham khảo" sub="Mức giá tham khảo. HEONA MEDIA sẽ xây dựng báo giá riêng theo quy mô và yêu cầu thực tế." />
       
       <Section narrow>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {PLANS.map((plan, index) => (
             <div 
                 key={plan.id}
-                className={`flex flex-col rounded-2xl p-8 border transition-all duration-300 animate-fade-in group hover:border-primary hover:-translate-y-2 ${
+                className={`flex flex-col rounded-2xl p-6 border transition-all duration-300 animate-fade-in group hover:border-primary hover:-translate-y-2 ${
                     plan.highlight 
-                    ? 'bg-gradient-to-b from-[#1f1f28] to-bgCard border-primary shadow-xl shadow-primary/10 transform md:-translate-y-4' 
+                    ? 'bg-gradient-to-b from-[#1f1f28] to-bgCard border-primary shadow-xl shadow-primary/10 transform md:-translate-y-3' 
                     : 'bg-bgCard border-borderSubtle'
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
             >
-                <div className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">{plan.label}</div>
-                <h3 className="font-heading font-bold text-3xl mb-3 text-white">{plan.name}</h3>
-                <p className="text-base text-textMuted mb-8 h-12 leading-relaxed">{plan.desc}</p>
+                <div className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">{plan.label}</div>
+                <h3 className="font-heading font-bold text-2xl mb-2 text-white">{plan.name}</h3>
+                <p className="text-sm text-textMuted mb-6 h-10 leading-relaxed">{plan.desc}</p>
                 
-                <div className="text-4xl font-bold text-white mb-2">{plan.price}</div>
-                <div className="text-sm text-textMuted mb-8">{plan.note}</div>
+                <div className="text-3xl font-bold text-white mb-1">{plan.price}</div>
+                <div className="text-xs text-textMuted mb-6">{plan.note}</div>
 
-                <ul className="flex-grow space-y-4 mb-10">
+                <ul className="flex-grow space-y-3 mb-8">
                     {plan.features.map((f, i) => (
-                        <li key={i} className="flex items-center gap-4 text-base text-textMuted">
-                            <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                                <Check size={14} />
+                        <li key={i} className="flex items-center gap-3 text-sm text-textMuted">
+                            <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                <Check size={12} />
                             </div>
                             {f}
                         </li>
@@ -72,7 +73,7 @@ export const Pricing: React.FC = () => {
 
                 <Link 
                     to="/contact" 
-                    className={`w-full py-4 rounded-full text-base font-bold text-center transition-all ${
+                    className={`w-full py-3 rounded-full text-sm font-bold text-center transition-all ${
                         plan.highlight
                         ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/20 hover:shadow-primary/40'
                         : 'border border-borderSubtle text-white hover:border-transparent hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white'

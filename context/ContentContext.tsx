@@ -1,10 +1,7 @@
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 import { ContentState, Project, Service, ContactInfo } from '../types';
 
-// --- CẤU HÌNH NỘI DUNG WEBSITE TẠI ĐÂY ---
-
-// 1. DANH SÁCH DỰ ÁN
 const DEFAULT_PROJECTS: Project[] = [
   { 
     id: 1, 
@@ -57,7 +54,6 @@ const DEFAULT_PROJECTS: Project[] = [
   },
 ];
 
-// 2. DANH SÁCH DỊCH VỤ
 const DEFAULT_SERVICES: Service[] = [
   {
     id: 'A',
@@ -106,95 +102,25 @@ const DEFAULT_SERVICES: Service[] = [
   }
 ];
 
-// 3. THÔNG TIN LIÊN HỆ
 const DEFAULT_CONTACT_INFO: ContactInfo = {
   phone: '0931 899 427',
   email: 'heonamedia@gmail.com',
   address: '45/30 đường số 1, Phường Thống Tây Hội, TP. HCM',
-  facebook: '#',
+  facebook: 'https://www.facebook.com/heonamedia',
   youtube: '#',
-  instagram: '#',
-  linkedin: '#'
+  zalo: 'https://zalo.me/0931899427'
 };
 
-// --- KẾT THÚC PHẦN CẤU HÌNH ---
-
-// Context Definition
-interface ContentContextType extends ContentState {
-  updateProjects: (projects: Project[]) => void;
-  updateServices: (services: Service[]) => void;
-  updateContact: (contactInfo: ContactInfo) => void;
-  resetToDefaults: () => void;
-}
+// Read-only context
+interface ContentContextType extends ContentState {}
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // State initialization with lazy loading from localStorage
-  const [projects, setProjects] = useState<Project[]>(() => {
-    try {
-      const saved = localStorage.getItem('heona_projects');
-      return saved ? JSON.parse(saved) : DEFAULT_PROJECTS;
-    } catch {
-      return DEFAULT_PROJECTS;
-    }
-  });
-
-  const [services, setServices] = useState<Service[]>(() => {
-    try {
-      const saved = localStorage.getItem('heona_services');
-      return saved ? JSON.parse(saved) : DEFAULT_SERVICES;
-    } catch {
-      return DEFAULT_SERVICES;
-    }
-  });
-
-  const [contactInfo, setContactInfo] = useState<ContactInfo>(() => {
-    try {
-      const saved = localStorage.getItem('heona_contact');
-      return saved ? JSON.parse(saved) : DEFAULT_CONTACT_INFO;
-    } catch {
-      return DEFAULT_CONTACT_INFO;
-    }
-  });
-
-  // Effects to save to localStorage on change
-  useEffect(() => {
-    localStorage.setItem('heona_projects', JSON.stringify(projects));
-  }, [projects]);
-
-  useEffect(() => {
-    localStorage.setItem('heona_services', JSON.stringify(services));
-  }, [services]);
-
-  useEffect(() => {
-    localStorage.setItem('heona_contact', JSON.stringify(contactInfo));
-  }, [contactInfo]);
-
-  // Update functions
-  const updateProjects = (newProjects: Project[]) => setProjects(newProjects);
-  const updateServices = (newServices: Service[]) => setServices(newServices);
-  const updateContact = (newContact: ContactInfo) => setContactInfo(newContact);
-
-  const resetToDefaults = () => {
-    if (window.confirm('Khôi phục dữ liệu gốc? Mọi thay đổi sẽ bị mất.')) {
-      setProjects(DEFAULT_PROJECTS);
-      setServices(DEFAULT_SERVICES);
-      setContactInfo(DEFAULT_CONTACT_INFO);
-      localStorage.removeItem('heona_projects');
-      localStorage.removeItem('heona_services');
-      localStorage.removeItem('heona_contact');
-    }
-  };
-
   const value: ContentContextType = {
-    projects,
-    services,
-    contactInfo,
-    updateProjects,
-    updateServices,
-    updateContact,
-    resetToDefaults,
+    projects: DEFAULT_PROJECTS,
+    services: DEFAULT_SERVICES,
+    contactInfo: DEFAULT_CONTACT_INFO,
   };
 
   return (

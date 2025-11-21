@@ -1,30 +1,48 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { PageHero, Section } from '../components/Section';
 import { Card } from '../components/Card';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Loader2, CheckCircle, AlertCircle, Facebook, ExternalLink } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
+import emailjs from '@emailjs/browser';
+
+const SERVICE_ID = 'service_ioldixq';
+const TEMPLATE_ID = 'template_af80xxr';
+const PUBLIC_KEY = 'j2_6S7H7hc8wYCp3h';
 
 export const Contact: React.FC = () => {
   const { contactInfo } = useContent();
-  const [formData, setFormData] = useState({
-    name: '',
-    company: '',
-    phone: '',
-    email: '',
-    service: '',
-    budget: '',
-    message: ''
-  });
+  const form = useRef<HTMLFormElement>(null);
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Cảm ơn bạn đã gửi thông tin. Chúng tôi sẽ liên hệ sớm nhất!');
+    
+    if (!form.current) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    emailjs
+      .sendForm(SERVICE_ID, TEMPLATE_ID, form.current, {
+        publicKey: PUBLIC_KEY,
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+          setIsSubmitting(false);
+          setSubmitStatus('success');
+          if (form.current) form.current.reset();
+          setTimeout(() => setSubmitStatus('idle'), 5000);
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+          setIsSubmitting(false);
+          setSubmitStatus('error');
+        },
+      );
   };
 
   return (
@@ -32,158 +50,182 @@ export const Contact: React.FC = () => {
       <PageHero title="Liên hệ HEONA MEDIA" sub="Gửi thông tin để chúng tôi tư vấn giải pháp truyền thông & sự kiện phù hợp nhất cho bạn." />
 
       <Section narrow>
-        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-10 items-start">
-          {/* Info Card */}
-          <Card noHover className="p-8">
-             <h2 className="font-heading font-bold text-3xl mb-2">Thông tin liên hệ</h2>
-             <p className="text-base text-textMuted mb-8">HEONA MEDIA – Truyền thông • Branding • Sự kiện</p>
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-8 items-start">
+          <Card noHover className="p-6">
+             <h2 className="font-heading font-bold text-xl mb-1">Thông tin liên hệ</h2>
+             <p className="text-xs text-textMuted mb-6">HEONA MEDIA – Truyền thông • Branding • Sự kiện</p>
 
-             <div className="space-y-8">
-                <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <Phone size={24} />
+             <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <Phone size={20} />
                     </div>
                     <div>
-                        <div className="text-sm text-textMuted uppercase mb-1">Phone</div>
-                        <div className="font-medium text-white text-lg">{contactInfo.phone}</div>
+                        <div className="text-[10px] text-textMuted uppercase mb-0.5">Phone / Zalo</div>
+                        <div className="font-medium text-white text-sm">{contactInfo.phone}</div>
                     </div>
                 </div>
 
-                <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <Mail size={24} />
+                <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <Mail size={20} />
                     </div>
                     <div>
-                        <div className="text-sm text-textMuted uppercase mb-1">Email</div>
-                        <div className="font-medium text-white text-lg">{contactInfo.email}</div>
+                        <div className="text-[10px] text-textMuted uppercase mb-0.5">Email</div>
+                        <div className="font-medium text-white text-sm">{contactInfo.email}</div>
                     </div>
                 </div>
 
-                <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <MapPin size={24} />
+                <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <MapPin size={20} />
                     </div>
                     <div>
-                        <div className="text-sm text-textMuted uppercase mb-1">Địa chỉ</div>
-                        <div className="font-medium text-white text-lg">{contactInfo.address}</div>
+                        <div className="text-[10px] text-textMuted uppercase mb-0.5">Địa chỉ</div>
+                        <div className="font-medium text-white text-sm">{contactInfo.address}</div>
+                    </div>
+                </div>
+
+                <div className="pt-4 border-t border-white/5 mt-4">
+                    <div className="text-[10px] text-textMuted uppercase mb-3">Kết nối mạng xã hội</div>
+                    <div className="flex flex-col gap-3">
+                        <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded bg-[#1877F2]/10 border border-[#1877F2]/20 hover:bg-[#1877F2]/20 transition-all group">
+                            <Facebook size={18} className="text-[#1877F2]" />
+                            <span className="text-sm font-medium text-white group-hover:text-[#1877F2] transition-colors">Fanpage Heona Media</span>
+                            <ExternalLink size={12} className="ml-auto opacity-50" />
+                        </a>
+                        <a href={contactInfo.zalo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded bg-[#0068FF]/10 border border-[#0068FF]/20 hover:bg-[#0068FF]/20 transition-all group">
+                            <div className="w-[18px] h-[18px] flex items-center justify-center font-bold text-[8px] bg-[#0068FF] text-white rounded-full">Z</div>
+                            <span className="text-sm font-medium text-white group-hover:text-[#0068FF] transition-colors">Chat Zalo ngay</span>
+                            <ExternalLink size={12} className="ml-auto opacity-50" />
+                        </a>
                     </div>
                 </div>
              </div>
              
-             <div className="mt-10 pt-8 border-t border-borderSubtle text-sm text-textMuted italic">
+             <div className="mt-6 pt-4 border-t border-borderSubtle text-[10px] text-textMuted italic">
                 Vui lòng để lại nội dung chi tiết, Heona Media sẽ phản hồi trong thời gian sớm nhất.
              </div>
           </Card>
 
-          {/* Form Card */}
-          <Card noHover className="p-8">
-            <h2 className="font-heading font-bold text-3xl mb-2">Gửi yêu cầu báo giá</h2>
-            <p className="text-base text-textMuted mb-8">Cho chúng tôi biết nhu cầu của bạn, đội ngũ sẽ tư vấn gói dịch vụ phù hợp.</p>
+          <Card noHover className="p-6">
+            <h2 className="font-heading font-bold text-xl mb-1">Gửi yêu cầu báo giá</h2>
+            <p className="text-xs text-textMuted mb-6">Cho chúng tôi biết nhu cầu của bạn, đội ngũ sẽ tư vấn gói dịch vụ phù hợp.</p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-3">
-                        <label className="text-sm text-textMuted font-medium">Họ tên *</label>
+            <form ref={form} onSubmit={sendEmail} className="space-y-5">
+                <div className="grid md:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs text-textMuted font-medium">Họ tên *</label>
                         <input 
                             type="text" 
                             name="name"
                             required
-                            value={formData.name}
-                            onChange={handleChange}
                             placeholder="Nhập họ tên..." 
-                            className="bg-[#111116] border border-borderSubtle rounded-lg px-5 py-3.5 text-base text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
+                            className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                         />
                     </div>
-                    <div className="flex flex-col gap-3">
-                        <label className="text-sm text-textMuted font-medium">Công ty</label>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs text-textMuted font-medium">Công ty</label>
                         <input 
                             type="text" 
                             name="company"
-                            value={formData.company}
-                            onChange={handleChange}
                             placeholder="Tên công ty..." 
-                            className="bg-[#111116] border border-borderSubtle rounded-lg px-5 py-3.5 text-base text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
+                            className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                         />
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-3">
-                        <label className="text-sm text-textMuted font-medium">Số điện thoại *</label>
+                <div className="grid md:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs text-textMuted font-medium">Số điện thoại *</label>
                         <input 
                             type="tel" 
                             name="phone"
                             required
-                            value={formData.phone}
-                            onChange={handleChange}
                             placeholder="SĐT liên hệ..." 
-                            className="bg-[#111116] border border-borderSubtle rounded-lg px-5 py-3.5 text-base text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
+                            className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                         />
                     </div>
-                    <div className="flex flex-col gap-3">
-                        <label className="text-sm text-textMuted font-medium">Email *</label>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs text-textMuted font-medium">Email *</label>
                         <input 
                             type="email" 
                             name="email"
                             required
-                            value={formData.email}
-                            onChange={handleChange}
                             placeholder="Email..." 
-                            className="bg-[#111116] border border-borderSubtle rounded-lg px-5 py-3.5 text-base text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
+                            className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                         />
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-3">
-                        <label className="text-sm text-textMuted font-medium">Loại dịch vụ</label>
+                <div className="grid md:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs text-textMuted font-medium">Loại dịch vụ</label>
                         <select 
                             name="service"
-                            value={formData.service}
-                            onChange={handleChange}
-                            className="bg-[#111116] border border-borderSubtle rounded-lg px-5 py-3.5 text-base text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all appearance-none"
+                            className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all appearance-none"
                         >
                             <option value="">Chọn loại dịch vụ</option>
-                            <option value="personal-brand">Xây dựng thương hiệu</option>
-                            <option value="event">Tổ chức sự kiện</option>
-                            <option value="marketing">Truyền thông</option>
-                            <option value="branding-photo">Hình ảnh thương hiệu</option>
+                            <option value="Xây dựng thương hiệu">Xây dựng thương hiệu</option>
+                            <option value="Tổ chức sự kiện">Tổ chức sự kiện</option>
+                            <option value="Truyền thông">Truyền thông</option>
+                            <option value="Hình ảnh thương hiệu">Hình ảnh thương hiệu</option>
+                            <option value="Khác">Khác</option>
                         </select>
                     </div>
-                    <div className="flex flex-col gap-3">
-                        <label className="text-sm text-textMuted font-medium">Ngân sách dự kiến</label>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-xs text-textMuted font-medium">Ngân sách dự kiến</label>
                         <select 
                             name="budget"
-                            value={formData.budget}
-                            onChange={handleChange}
-                            className="bg-[#111116] border border-borderSubtle rounded-lg px-5 py-3.5 text-base text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all appearance-none"
+                            className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all appearance-none"
                         >
                             <option value="">Chưa xác định</option>
-                            <option value="under50">Dưới 50 triệu</option>
-                            <option value="50-100">50 – 100 triệu</option>
-                            <option value="100-300">100 – 300 triệu</option>
-                            <option value="300plus">Trên 300 triệu</option>
+                            <option value="Dưới 50 triệu">Dưới 50 triệu</option>
+                            <option value="50 – 100 triệu">50 – 100 triệu</option>
+                            <option value="100 – 300 triệu">100 – 300 triệu</option>
+                            <option value="Trên 300 triệu">Trên 300 triệu</option>
                         </select>
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-3">
-                    <label className="text-sm text-textMuted font-medium">Nội dung yêu cầu</label>
+                <div className="flex flex-col gap-1.5">
+                    <label className="text-xs text-textMuted font-medium">Nội dung yêu cầu</label>
                     <textarea 
                         name="message"
-                        value={formData.message}
-                        onChange={handleChange}
                         placeholder="Mô tả chi tiết..." 
-                        className="bg-[#111116] border border-borderSubtle rounded-lg px-5 py-3.5 text-base text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all min-h-[140px]"
+                        className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all min-h-[120px]"
                     ></textarea>
                 </div>
 
-                <button 
-                    type="submit" 
-                    className="w-full py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300"
-                >
-                    Gửi thông tin & Nhận báo giá
-                </button>
+                <div className="pt-1">
+                    {submitStatus === 'success' && (
+                        <div className="mb-3 p-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center gap-2 text-green-400 animate-fade-in text-sm">
+                            <CheckCircle size={16} />
+                            <span>Gửi thành công! Chúng tôi sẽ sớm liên hệ lại với bạn.</span>
+                        </div>
+                    )}
+
+                    {submitStatus === 'error' && (
+                        <div className="mb-3 p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-2 text-red-400 animate-fade-in text-sm">
+                            <AlertCircle size={16} />
+                            <span>Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ hotline.</span>
+                        </div>
+                    )}
+
+                    <button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="w-full py-3.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold text-sm shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                        {isSubmitting ? (
+                            <>
+                                <Loader2 className="animate-spin" size={18} /> Đang gửi thông tin...
+                            </>
+                        ) : (
+                            "Gửi thông tin & Nhận báo giá"
+                        )}
+                    </button>
+                </div>
             </form>
           </Card>
         </div>

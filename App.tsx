@@ -11,7 +11,6 @@ import { Blog } from './pages/Blog';
 import { Contact } from './pages/Contact';
 import { ContentProvider } from './context/ContentContext';
 
-// Scroll to top on route change using useLayoutEffect for immediate execution
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
