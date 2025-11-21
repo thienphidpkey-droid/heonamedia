@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 
 const NAV_LINKS = [
   { path: '/', label: 'Trang chủ' },
@@ -77,7 +77,18 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Actions */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-5">
+            {/* Hotline Desktop */}
+            <a href="tel:0931899427" className="flex items-center gap-2.5 group">
+                <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                    <Phone size={16} className="animate-pulse-slow" />
+                </div>
+                <div className="flex flex-col">
+                   <span className="text-[9px] font-bold uppercase tracking-wider text-textMuted group-hover:text-secondary transition-colors">Hotline</span>
+                   <span className="text-sm font-bold text-white leading-none">0931 899 427</span>
+                </div>
+            </a>
+
             <Link
               to="/contact"
               className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#5a2dff] via-primary to-secondary text-white text-sm font-bold hover:from-secondary hover:to-secondary hover:shadow-lg hover:shadow-secondary/25 hover:-translate-y-0.5 transition-all duration-300"
@@ -116,7 +127,13 @@ export const Header: React.FC = () => {
                 {link.label}
               </Link>
             ))}
-            <div className="flex gap-3 mt-3 px-2 pb-2">
+            <div className="flex flex-col gap-3 mt-3 px-2 pb-2">
+              <a 
+                href="tel:0931899427"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-white/5 text-white text-sm font-bold border border-white/10 hover:bg-primary/20 hover:border-primary/50 transition-all"
+              >
+                 <Phone size={16} /> 0931 899 427
+              </a>
               <Link
                 to="/contact"
                 onClick={handleMobileLinkClick}

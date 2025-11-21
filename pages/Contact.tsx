@@ -91,12 +91,12 @@ export const Contact: React.FC = () => {
                     <div className="flex flex-col gap-3">
                         <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded bg-[#1877F2]/10 border border-[#1877F2]/20 hover:bg-[#1877F2]/20 transition-all group">
                             <Facebook size={18} className="text-[#1877F2]" />
-                            <span className="text-sm font-medium text-white group-hover:text-[#1877F2] transition-colors">Fanpage Heona Media</span>
+                            <span className="text-sm font-medium text-white group-hover:text-[#1877F2] transition-colors">facebook.com/heonamedia</span>
                             <ExternalLink size={12} className="ml-auto opacity-50" />
                         </a>
                         <a href={contactInfo.zalo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded bg-[#0068FF]/10 border border-[#0068FF]/20 hover:bg-[#0068FF]/20 transition-all group">
                             <div className="w-[18px] h-[18px] flex items-center justify-center font-bold text-[8px] bg-[#0068FF] text-white rounded-full">Z</div>
-                            <span className="text-sm font-medium text-white group-hover:text-[#0068FF] transition-colors">Chat Zalo ngay</span>
+                            <span className="text-sm font-medium text-white group-hover:text-[#0068FF] transition-colors">{contactInfo.phone}</span>
                             <ExternalLink size={12} className="ml-auto opacity-50" />
                         </a>
                     </div>

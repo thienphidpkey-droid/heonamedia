@@ -107,7 +107,7 @@ const DEFAULT_CONTACT_INFO: ContactInfo = {
   email: 'heonamedia@gmail.com',
   address: '45/30 đường số 1, Phường Thống Tây Hội, TP. HCM',
   facebook: 'https://www.facebook.com/heonamedia',
-  youtube: '#',
+  youtube: '', // Disabled link
   zalo: 'https://zalo.me/0931899427'
 };
 

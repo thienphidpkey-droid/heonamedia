@@ -54,9 +54,11 @@ export const Footer: React.FC = () => {
               <a href={contactInfo.zalo} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-borderSubtle flex items-center justify-center text-textMuted hover:text-white hover:border-primary hover:bg-primary/10 transition-all duration-300" title="Zalo">
                   <span className="font-bold text-[9px]">Zalo</span>
               </a>
-              <a href={contactInfo.youtube} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-borderSubtle flex items-center justify-center text-textMuted hover:text-white hover:border-primary hover:bg-primary/10 transition-all duration-300" title="Youtube">
-                  <Youtube size={16} />
-              </a>
+              {contactInfo.youtube && (
+                <a href={contactInfo.youtube} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-borderSubtle flex items-center justify-center text-textMuted hover:text-white hover:border-primary hover:bg-primary/10 transition-all duration-300" title="Youtube">
+                    <Youtube size={16} />
+                </a>
+              )}
             </div>
           </div>
         </div>
