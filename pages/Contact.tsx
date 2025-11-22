@@ -2,12 +2,15 @@
 import React, { useState, useRef } from 'react';
 import { PageHero, Section } from '../components/Section';
 import { Card } from '../components/Card';
-import { Phone, Mail, MapPin, Loader2, CheckCircle, AlertCircle, Facebook, ExternalLink } from 'lucide-react';
+import { Phone, Mail, MapPin, Loader2, CheckCircle, AlertCircle, Facebook, ExternalLink, Youtube } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
 import emailjs from '@emailjs/browser';
+import { SEO } from '../components/SEO';
+import { ZaloIcon } from '../components/Footer';
 
+// Đảm bảo các ID này đúng với trong EmailJS Dashboard của bạn
 const SERVICE_ID = 'service_ioldixq';
-const TEMPLATE_ID = 'template_af80xxr';
+const TEMPLATE_ID = 'template_4h2poul';
 const PUBLIC_KEY = 'j2_6S7H7hc8wYCp3h';
 
 export const Contact: React.FC = () => {
@@ -16,6 +19,7 @@ export const Contact: React.FC = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +28,7 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
 
     emailjs
       .sendForm(SERVICE_ID, TEMPLATE_ID, form.current, {
@@ -38,15 +43,25 @@ export const Contact: React.FC = () => {
           setTimeout(() => setSubmitStatus('idle'), 5000);
         },
         (error) => {
-          console.log('FAILED...', error.text);
+          console.error('FAILED...', error);
           setIsSubmitting(false);
           setSubmitStatus('error');
+          // Lấy thông báo lỗi cụ thể để hiển thị
+          setErrorMessage(error.text || "Lỗi kết nối đến dịch vụ Email.");
+          
+          // Hiển thị alert để người dùng biết ngay lập tức
+          alert(`Gửi thất bại: ${error.text}. Vui lòng kiểm tra lại Service ID hoặc kết nối Gmail.`);
         },
       );
   };
 
   return (
     <>
+      <SEO 
+        title="Liên Hệ"
+        description="Liên hệ HEONA MEDIA để nhận tư vấn và báo giá tổ chức sự kiện, dịch vụ media trọn gói. Hotline: 0931 899 427. Địa chỉ: Gò Vấp, TP.HCM."
+        url="/contact"
+      />
       <PageHero title="Liên hệ HEONA MEDIA" sub="Gửi thông tin để chúng tôi tư vấn giải pháp truyền thông & sự kiện phù hợp nhất cho bạn." />
 
       <Section narrow>
@@ -89,16 +104,43 @@ export const Contact: React.FC = () => {
                 <div className="pt-4 border-t border-white/5 mt-4">
                     <div className="text-[10px] text-textMuted uppercase mb-3">Kết nối mạng xã hội</div>
                     <div className="flex flex-col gap-3">
-                        <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded bg-[#1877F2]/10 border border-[#1877F2]/20 hover:bg-[#1877F2]/20 transition-all group">
-                            <Facebook size={18} className="text-[#1877F2]" />
-                            <span className="text-sm font-medium text-white group-hover:text-[#1877F2] transition-colors">facebook.com/heonamedia</span>
-                            <ExternalLink size={12} className="ml-auto opacity-50" />
+                        <a 
+                          href={contactInfo.facebook} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center gap-3 p-3 rounded bg-blue-600/5 border border-blue-600/20 hover:border-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.2)] hover:bg-blue-600/10 transition-all group"
+                          aria-label="Fanpage Facebook"
+                        >
+                            <Facebook size={18} className="text-blue-600 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
+                            <span className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors">Fanpage Heona Media</span>
+                            <ExternalLink size={12} className="ml-auto opacity-50 group-hover:text-blue-400" />
                         </a>
-                        <a href={contactInfo.zalo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded bg-[#0068FF]/10 border border-[#0068FF]/20 hover:bg-[#0068FF]/20 transition-all group">
-                            <div className="w-[18px] h-[18px] flex items-center justify-center font-bold text-[8px] bg-[#0068FF] text-white rounded-full">Z</div>
-                            <span className="text-sm font-medium text-white group-hover:text-[#0068FF] transition-colors">{contactInfo.phone}</span>
-                            <ExternalLink size={12} className="ml-auto opacity-50" />
+                        
+                        <a 
+                          href={contactInfo.zalo} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center gap-3 p-3 rounded bg-blue-700/5 border border-blue-700/20 hover:border-blue-600 hover:shadow-[0_0_15px_rgba(29,78,216,0.2)] hover:bg-blue-700/10 transition-all group"
+                          aria-label="Chat Zalo"
+                        >
+                            <ZaloIcon size={18} className="text-blue-700 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
+                            <span className="text-sm font-medium text-white group-hover:text-blue-500 transition-colors">Chat Zalo ngay</span>
+                            <ExternalLink size={12} className="ml-auto opacity-50 group-hover:text-blue-500" />
                         </a>
+
+                        {contactInfo.youtube && (
+                          <a 
+                            href={contactInfo.youtube} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center gap-3 p-3 rounded bg-red-600/5 border border-red-600/20 hover:border-red-500 hover:shadow-[0_0_15px_rgba(220,38,38,0.2)] hover:bg-red-600/10 transition-all group"
+                            aria-label="Youtube Channel"
+                          >
+                              <Youtube size={18} className="text-red-600 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
+                              <span className="text-sm font-medium text-white group-hover:text-red-400 transition-colors">Heona Media channel</span>
+                              <ExternalLink size={12} className="ml-auto opacity-50 group-hover:text-red-400" />
+                          </a>
+                        )}
                     </div>
                 </div>
              </div>
@@ -208,7 +250,10 @@ export const Contact: React.FC = () => {
                     {submitStatus === 'error' && (
                         <div className="mb-3 p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-2 text-red-400 animate-fade-in text-sm">
                             <AlertCircle size={16} />
-                            <span>Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ hotline.</span>
+                            <div className="flex flex-col">
+                                <span>Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ hotline.</span>
+                                {errorMessage && <span className="text-xs opacity-80 mt-1">Chi tiết: {errorMessage}</span>}
+                            </div>
                         </div>
                     )}
 

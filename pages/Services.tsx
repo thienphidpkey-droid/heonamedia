@@ -4,12 +4,18 @@ import { Link } from 'react-router-dom';
 import { PageHero, Section } from '../components/Section';
 import { Zap, ChevronRight } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
+import { SEO } from '../components/SEO';
 
 export const Services: React.FC = () => {
   const { services } = useContent();
 
   return (
     <>
+      <SEO 
+        title="Dịch Vụ"
+        description="Các gói dịch vụ của Heona Media: Tổ chức sự kiện trọn gói, Quay phim chụp ảnh sự kiện, Livestream, Xây dựng nhân hiệu và Booking KOLs."
+        url="/services"
+      />
       <PageHero 
         title="Các gói dịch vụ" 
         sub="Giải pháp linh hoạt, đồng hành cùng cá nhân & doanh nghiệp trong kỷ nguyên số." 

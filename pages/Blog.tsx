@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { PageHero, Section } from '../components/Section';
 import { BlogPost } from '../types';
 import { X, Calendar, User, Clock, ArrowRight } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 const POSTS: BlogPost[] = [
   { 
@@ -182,6 +183,11 @@ export const Blog: React.FC = () => {
 
   return (
     <>
+      <SEO 
+        title="Blog Sự Kiện"
+        description="Chia sẻ kinh nghiệm tổ chức sự kiện, kiến thức âm thanh ánh sáng, kỹ thuật livestream và checklist sự kiện từ đội ngũ Heona Media."
+        url="/blog"
+      />
       <PageHero title="Blog – Chia sẻ kinh nghiệm" sub="Các bài viết hướng dẫn, checklist và kinh nghiệm thực tế trong ngành sự kiện – media." />
 
       <Section narrow>

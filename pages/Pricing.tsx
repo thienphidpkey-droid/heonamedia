@@ -4,6 +4,7 @@ import { PageHero, Section } from '../components/Section';
 import { PricingPlan } from '../types';
 import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 const PLANS: PricingPlan[] = [
   {
@@ -39,6 +40,11 @@ const PLANS: PricingPlan[] = [
 export const Pricing: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="Bảng Giá Dịch Vụ"
+        description="Tham khảo bảng giá tổ chức sự kiện, cho thuê thiết bị và sản xuất media tại Heona Media. Chi phí minh bạch, tối ưu ngân sách cho doanh nghiệp."
+        url="/pricing"
+      />
       <PageHero title="Gói dịch vụ tham khảo" sub="Mức giá tham khảo. HEONA MEDIA sẽ xây dựng báo giá riêng theo quy mô và yêu cầu thực tế." />
       
       <Section narrow>

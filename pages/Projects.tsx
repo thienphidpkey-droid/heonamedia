@@ -5,6 +5,7 @@ import { PageHero, Section } from '../components/Section';
 import { Project } from '../types';
 import { X, Filter } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
+import { SEO } from '../components/SEO';
 
 interface ProjectItemProps {
   project: Project;
@@ -73,6 +74,11 @@ export const Projects: React.FC = () => {
 
   return (
     <>
+      <SEO 
+        title="Dự Án Tiêu Biểu"
+        description="Tham khảo các dự án tổ chức sự kiện, sản phẩm media, TVC doanh nghiệp và các chiến dịch xây dựng thương hiệu cá nhân do HEONA MEDIA thực hiện."
+        url="/projects"
+      />
       <PageHero 
         title="Dự án tiêu biểu" 
         sub="Khám phá các sự kiện và sản phẩm truyền thông mà HEONA MEDIA đã thực hiện bằng sự tận tâm và chuyên nghiệp." 

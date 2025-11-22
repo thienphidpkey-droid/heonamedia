@@ -3,10 +3,16 @@ import React from 'react';
 import { PageHero, Section } from '../components/Section';
 import { Card } from '../components/Card';
 import { Eye, Target, Diamond, Award } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const About: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="Về Chúng Tôi"
+        description="Câu chuyện thương hiệu HEONA MEDIA - Hành trình kiến tạo những sự kiện tử tế và xây dựng thương hiệu cá nhân chuyên nghiệp."
+        url="/about"
+      />
       <Section className="pt-10 pb-10 md:pt-16 md:pb-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">

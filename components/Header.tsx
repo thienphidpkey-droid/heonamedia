@@ -50,6 +50,8 @@ export const Header: React.FC = () => {
               src="https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg" 
               alt="HEONA MEDIA"
               className="w-10 h-10 rounded-full object-cover shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform border border-white/10"
+              width="40"
+              height="40"
             />
             <div className="flex flex-col">
               <span className="font-heading text-sm uppercase tracking-[0.08em] text-white font-bold leading-none mb-1">
@@ -101,6 +103,7 @@ export const Header: React.FC = () => {
           <button
             className="lg:hidden w-9 h-9 rounded-full border border-borderSubtle flex items-center justify-center text-white hover:bg-white/5 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Mở menu"
           >
             {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>

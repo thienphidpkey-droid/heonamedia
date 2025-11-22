@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Section } from '../components/Section';
 import { ArrowRight, Hexagon, Layers, Radio, Phone, Mail, MapPin } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
+import { SEO } from '../components/SEO';
 
 const HERO_IMAGES = [
   "https://i.postimg.cc/hvSh7Y9d/a1.jpg",
@@ -24,6 +25,11 @@ export const Home: React.FC = () => {
 
   return (
     <>
+      <SEO 
+        title="Tổ chức sự kiện & Sản xuất Media"
+        description="HEONA MEDIA chuyên tổ chức sự kiện trọn gói, livestream chuyên nghiệp, quay phim doanh nghiệp và xây dựng thương hiệu cá nhân uy tín tại TP.HCM."
+      />
+
       {/* Hero Section */}
       <Section className="pt-10 pb-8 md:pt-20 md:pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none z-0" />
@@ -63,13 +69,13 @@ export const Home: React.FC = () => {
             </p>
             
             <div className="flex flex-wrap gap-4 mb-10">
-              <Link to="/projects" className="group relative px-8 py-4 rounded-none clip-path-slant bg-white text-bgMain font-bold text-sm transition-all hover:bg-secondary hover:text-white overflow-hidden">
+              <Link to="/projects" className="group relative px-8 py-4 rounded-none clip-path-slant bg-white text-bgMain font-bold text-sm transition-all hover:bg-secondary hover:text-white overflow-hidden" aria-label="Xem danh sách dự án">
                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                  <span className="relative z-10 flex items-center gap-2">
                     XEM DỰ ÁN <ArrowRight size={16} />
                  </span>
               </Link>
-              <Link to="/contact" className="px-8 py-4 rounded-none clip-path-slant border border-white/20 bg-white/5 backdrop-blur text-white font-bold text-sm hover:bg-secondary hover:border-secondary hover:shadow-lg hover:shadow-secondary/20 transition-all duration-300">
+              <Link to="/contact" className="px-8 py-4 rounded-none clip-path-slant border border-white/20 bg-white/5 backdrop-blur text-white font-bold text-sm hover:bg-secondary hover:border-secondary hover:shadow-lg hover:shadow-secondary/20 transition-all duration-300" aria-label="Liên hệ báo giá">
                 NHẬN BÁO GIÁ NHANH
               </Link>
             </div>
@@ -92,12 +98,17 @@ export const Home: React.FC = () => {
                     key={index}
                     className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
                   >
-                    <img src={img} alt="Hero" className="w-full h-full object-cover" />
+                    <img 
+                        src={img} 
+                        alt={`Heona Media Event Highlight ${index + 1}`} 
+                        className="w-full h-full object-cover"
+                        loading={index === 0 ? "eager" : "lazy"} // Optimize LCP
+                        width="800" 
+                        height="600"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-bgMain via-transparent to-transparent opacity-40"></div>
                   </div>
                 ))}
-                
-                {/* Removed text footer here as requested */}
              </div>
           </div>
         </div>
@@ -116,7 +127,7 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <Link to="/pricing" className="group relative bg-[#111115] border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-500 flex flex-col">
+          <Link to="/pricing" className="group relative bg-[#111115] border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-500 flex flex-col" aria-label="Chi tiết dịch vụ Tổ chức sự kiện">
              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
              <div className="p-8 relative z-10 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-5">
@@ -143,7 +154,7 @@ export const Home: React.FC = () => {
              </div>
           </Link>
 
-          <Link to="/pricing" className="group relative bg-[#111115] border border-white/10 rounded-xl overflow-hidden hover:border-secondary/50 transition-all duration-500 flex flex-col">
+          <Link to="/pricing" className="group relative bg-[#111115] border border-white/10 rounded-xl overflow-hidden hover:border-secondary/50 transition-all duration-500 flex flex-col" aria-label="Chi tiết dịch vụ Xây dựng thương hiệu">
              <div className="absolute inset-0 bg-gradient-to-l from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
              <div className="p-8 relative z-10 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-5">
@@ -182,7 +193,12 @@ export const Home: React.FC = () => {
          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.slice(0, 4).map((item) => (
                 <div key={item.id} className="group relative aspect-video rounded-xl overflow-hidden border border-white/10 bg-bgCard hover:border-primary/50 transition-all duration-500">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                        loading="lazy"
+                    />
                     
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90"></div>
                     
@@ -200,7 +216,7 @@ export const Home: React.FC = () => {
          </div>
          
          <div className="mt-12 flex justify-center">
-            <Link to="/projects" className="group relative px-10 py-4 bg-white text-bgMain font-heading font-bold text-base tracking-wider rounded-full hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(111,58,255,0.6)] flex items-center gap-2 overflow-hidden">
+            <Link to="/projects" className="group relative px-10 py-4 bg-white text-bgMain font-heading font-bold text-base tracking-wider rounded-full hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(111,58,255,0.6)] flex items-center gap-2 overflow-hidden" aria-label="Xem tất cả dự án">
                 <span className="relative z-10">XEM TẤT CẢ DỰ ÁN</span>
                 <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -251,7 +267,7 @@ export const Home: React.FC = () => {
                 </div>
                 
                 <div className="flex-shrink-0">
-                     <Link to="/contact" className="inline-flex items-center justify-center w-full md:w-auto px-7 py-3.5 bg-white text-black font-bold text-base rounded-full hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:scale-105 transition-all shadow-lg">
+                     <Link to="/contact" className="inline-flex items-center justify-center w-full md:w-auto px-7 py-3.5 bg-white text-black font-bold text-base rounded-full hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:scale-105 transition-all shadow-lg" aria-label="Gửi yêu cầu tư vấn ngay">
                         Gửi yêu cầu tư vấn <ArrowRight className="ml-2" size={18} />
                      </Link>
                      <div className="mt-3 text-center text-xs text-textMuted">

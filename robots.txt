@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://heonamedia.com/sitemap.xml
