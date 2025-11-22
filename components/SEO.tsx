@@ -19,7 +19,7 @@ export const SEO: React.FC<SEOProps> = ({
   image = 'https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg', 
   url = '', 
   type = 'website',
-  keywords = 'Tổ chức sự kiện, Event Agency, Media Production, Livestream, Quay phim sự kiện, Xây dựng thương hiệu cá nhân, TP.HCM'
+  keywords = 'Tổ chức sự kiện, Event Agency, Media Production, Livestream, Quay phim sự kiện, Xây dựng thương hiệu cá nhân, TP.HCM, Thi công sân khấu, Cho thuê âm thanh ánh sáng'
 }) => {
   const fullUrl = url ? `${DOMAIN}${url}` : DOMAIN;
   const fullTitle = `${title} | HEONA MEDIA`;
@@ -62,6 +62,13 @@ export const SEO: React.FC<SEOProps> = ({
     // Update Meta Tags
     updateMeta('description', description);
     updateMeta('keywords', keywords);
+    updateMeta('robots', 'index, follow');
+    updateMeta('author', 'HEONA MEDIA');
+    updateMeta('geo.region', 'VN-SG');
+    updateMeta('geo.placename', 'Ho Chi Minh City');
+    updateMeta('geo.position', '10.8372;106.6625');
+    updateMeta('ICBM', '10.8372, 106.6625');
+    
     updateLink('canonical', fullUrl);
 
     // Open Graph
@@ -85,6 +92,7 @@ export const SEO: React.FC<SEOProps> = ({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "HEONA MEDIA",
+      "alternateName": "Heona Media - Tổ chức sự kiện & Media Production",
       "image": image,
       "description": description,
       "telephone": "0931 899 427",
@@ -94,7 +102,8 @@ export const SEO: React.FC<SEOProps> = ({
         "streetAddress": "45/30 đường số 1, Phường Thống Tây Hội",
         "addressLocality": "Gò Vấp",
         "addressRegion": "TP. Hồ Chí Minh",
-        "addressCountry": "VN"
+        "addressCountry": "VN",
+        "postalCode": "700000"
       },
       "geo": {
         "@type": "GeoCoordinates",

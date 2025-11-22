@@ -58,7 +58,7 @@ export const Header: React.FC = () => {
                 HEONA MEDIA
               </span>
               <span className="text-[10px] text-textMuted uppercase tracking-[0.12em] leading-none">
-                Event • Media Production
+                Event • Personal Signature Brand
               </span>
             </div>
           </Link>
@@ -86,7 +86,7 @@ export const Header: React.FC = () => {
                     <Phone size={16} className="animate-pulse-slow" />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-[9px] font-bold uppercase tracking-wider text-textMuted group-hover:text-secondary transition-colors">Hotline</span>
+                   <span className="text-[10px] font-bold uppercase tracking-wider text-textMuted group-hover:text-secondary transition-colors">Hotline</span>
                    <span className="text-sm font-bold text-white leading-none">0931 899 427</span>
                 </div>
             </a>

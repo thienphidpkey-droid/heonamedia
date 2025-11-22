@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext } from 'react';
-import { ContentState, Project, Service, ContactInfo } from '../types';
+import { ContentState, Project, Service, ContactInfo, Testimonial } from '../types';
 
 const DEFAULT_PROJECTS: Project[] = [
   { 
@@ -111,6 +111,31 @@ const DEFAULT_CONTACT_INFO: ContactInfo = {
   zalo: 'https://zalo.me/0931899427'
 };
 
+const DEFAULT_TESTIMONIALS: Testimonial[] = [
+  {
+    id: 1,
+    name: "Ms. Thanh Nguyễn",
+    role: "Founder",
+    company: "Học viện Đào tạo",
+    content: "Heona Media không chỉ là đơn vị tổ chức sự kiện mà còn là người bạn đồng hành thấu hiểu. Team đã giúp tôi xây dựng hình ảnh chuyên nghiệp nhưng vẫn giữ được sự chân thật của mình.",
+    avatar: "https://i.postimg.cc/bwYfbhD9/3.jpg"
+  },
+  {
+    id: 2,
+    name: "Mr. Tịnh Khiêm",
+    role: "Tarot Reader",
+    content: "Nhờ chiến lược nội dung của Heona, kênh TikTok của mình đã tăng trưởng vượt bậc. Các bạn làm việc rất có tâm, support nhiệt tình kể cả ngoài giờ hành chính.",
+    avatar: "https://i.postimg.cc/QdNZ539q/2.jpg"
+  },
+  {
+    id: 3,
+    name: "Đại diện UniHome",
+    role: "Ban Tổ Chức",
+    content: "Sự kiện ra mắt dự án thành công rực rỡ nhờ sự chuyên nghiệp của Heona. Từ khâu ý tưởng đến thi công đều rất chỉn chu, đúng timeline và không phát sinh chi phí vô lý.",
+    avatar: "https://i.postimg.cc/13R16Qnj/7.jpg"
+  }
+];
+
 // Read-only context
 interface ContentContextType extends ContentState {}
 
@@ -121,6 +146,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     projects: DEFAULT_PROJECTS,
     services: DEFAULT_SERVICES,
     contactInfo: DEFAULT_CONTACT_INFO,
+    testimonials: DEFAULT_TESTIMONIALS,
   };
 
   return (

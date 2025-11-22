@@ -44,12 +44,21 @@ export interface ContactInfo {
   address: string;
   facebook: string;
   youtube: string;
-  zalo: string; // Added Zalo
-  // Removed instagram & linkedin
+  zalo: string;
+}
+
+export interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  company?: string;
+  content: string;
+  avatar?: string;
 }
 
 export interface ContentState {
   projects: Project[];
   services: Service[];
   contactInfo: ContactInfo;
+  testimonials: Testimonial[];
 }
