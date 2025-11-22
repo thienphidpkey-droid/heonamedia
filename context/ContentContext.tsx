@@ -19,7 +19,7 @@ const DEFAULT_PROJECTS: Project[] = [
   },
   { 
     id: 3, 
-    title: "Xây dựng thương hiệu trên TIKTOK – “Tịnh Khiêm Tarot”", 
+    title: "Xây dựng thương hiệu trên TIKTOK – “Tĩnh Khiêm Tarot”", 
     description: "Tăng nhận diện chuyên gia Tarot, video viral cao nhất đạt triệu view.", 
     image: "https://i.postimg.cc/QdNZ539q/2.jpg", 
     category: "Tiktok" 
@@ -118,21 +118,21 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     role: "Founder",
     company: "Học viện Đào tạo",
     content: "Heona Media không chỉ là đơn vị tổ chức sự kiện mà còn là người bạn đồng hành thấu hiểu. Team đã giúp tôi xây dựng hình ảnh chuyên nghiệp nhưng vẫn giữ được sự chân thật của mình.",
-    avatar: "https://i.postimg.cc/bwYfbhD9/3.jpg"
+    avatar: "https://i.postimg.cc/jdDjYvFH/z7250626038588-9609156227994e32d1287f4c993be365.jpg"
   },
   {
     id: 2,
-    name: "Mr. Tịnh Khiêm",
+    name: "Mrs. Tĩnh Khiêm",
     role: "Tarot Reader",
     content: "Nhờ chiến lược nội dung của Heona, kênh TikTok của mình đã tăng trưởng vượt bậc. Các bạn làm việc rất có tâm, support nhiệt tình kể cả ngoài giờ hành chính.",
-    avatar: "https://i.postimg.cc/QdNZ539q/2.jpg"
+    avatar: "https://i.postimg.cc/cC4r3ST4/z7250619915601-1472cd80a1fa1350a741ccdf037f80e9.jpg"
   },
   {
     id: 3,
     name: "Đại diện UniHome",
     role: "Ban Tổ Chức",
     content: "Sự kiện ra mắt dự án thành công rực rỡ nhờ sự chuyên nghiệp của Heona. Từ khâu ý tưởng đến thi công đều rất chỉn chu, đúng timeline và không phát sinh chi phí vô lý.",
-    avatar: "https://i.postimg.cc/13R16Qnj/7.jpg"
+    avatar: "https://i.postimg.cc/jSJCPv6b/z7250621981768-1c1edfce4e0eb14645a91f2493b25893.jpg"
   }
 ];
 

@@ -30,7 +30,13 @@ export const Header: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location]);
 
-  const handleMobileLinkClick = () => {
+  const handleLinkClick = (e: React.MouseEvent, path: string) => {
+    // Nếu đang ở trang chủ và bấm vào link trang chủ (hoặc logo), cuộn lên đầu
+    if (path === '/' && location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Luôn đóng menu mobile khi click
     setMobileMenuOpen(false);
   };
 
@@ -45,7 +51,11 @@ export const Header: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group" onClick={handleMobileLinkClick}>
+          <Link 
+            to="/" 
+            className="flex items-center gap-3 group" 
+            onClick={(e) => handleLinkClick(e, '/')}
+          >
             <img 
               src="https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg" 
               alt="HEONA MEDIA"
@@ -69,6 +79,7 @@ export const Header: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
+                onClick={(e) => handleLinkClick(e, link.path)}
                 className={`px-3 py-2 rounded-full transition-all duration-300 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary ${
                   location.pathname === link.path ? 'text-white' : 'text-textMuted'
                 }`}
@@ -120,7 +131,7 @@ export const Header: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                onClick={handleMobileLinkClick}
+                onClick={(e) => handleLinkClick(e, link.path)}
                 className={`block py-2.5 px-4 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === link.path
                     ? 'bg-white/5 text-white'
@@ -139,7 +150,7 @@ export const Header: React.FC = () => {
               </a>
               <Link
                 to="/contact"
-                onClick={handleMobileLinkClick}
+                onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-center px-4 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-sm font-bold hover:from-secondary hover:to-secondary transition-all"
               >
                 Nhận báo giá
