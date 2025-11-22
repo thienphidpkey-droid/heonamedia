@@ -114,9 +114,9 @@ const DEFAULT_CONTACT_INFO: ContactInfo = {
 const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    name: "Ms. Thanh Nguyễn",
-    role: "Founder",
-    company: "Học viện Đào tạo",
+    name: "Trainer Thanh Nguyên",
+    role: "Nhà huấn luyện kỹ năng toàn diện",
+    company: "",
     content: "Heona Media không chỉ là đơn vị tổ chức sự kiện mà còn là người bạn đồng hành thấu hiểu. Team đã giúp tôi xây dựng hình ảnh chuyên nghiệp nhưng vẫn giữ được sự chân thật của mình.",
     avatar: "https://i.postimg.cc/jdDjYvFH/z7250626038588-9609156227994e32d1287f4c993be365.jpg"
   },
