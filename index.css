@@ -20,9 +20,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: grayscale(100%) blur(8px) brightness(0.4);
+  filter: grayscale(70%) blur(3px) brightness(0.6);
   transform: scale(1.1);
-  /* Prevent blur edges */
 }
 
 /* Overlay for texture */
@@ -33,7 +32,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: radial-gradient(circle at center, transparent 0%, #050507 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(5, 5, 7, 0.7) 100%);
   pointer-events: none;
 }
 

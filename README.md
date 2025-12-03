@@ -1,20 +1,40 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# HEONA MEDIA - Website
 
-# Run and deploy your AI Studio app
+Trang web chuyên nghiệp cho HEONA MEDIA - Đơn vị tổ chức sự kiện & sản xuất media tại TP.HCM.
 
-This contains everything you need to run your app locally.
+## Công nghệ
 
-View your app in AI Studio: https://ai.studio/apps/drive/1t3C6rreqpDEGXLcNkjAyT5wdC07y3Snt
+- React 18 + TypeScript
+- Vite
+- Tailwind CSS
+- React Router DOM
+- EmailJS
 
-## Run Locally
+## Cài đặt & Chạy
 
-**Prerequisites:**  Node.js
+1. Cài đặt dependencies:
+   ```bash
+   npm install
+   ```
 
+2. Tạo file `.env` và thêm các biến môi trường:
+   ```
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
+   ```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+3. Chạy development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build cho production:
+   ```bash
+   npm run build
+   ```
+
+## Deploy
+
+Upload thư mục `dist/` lên hosting platform (Vercel, Netlify, etc.) và cấu hình environment variables.
+
