@@ -3,54 +3,54 @@ import React, { createContext, useContext } from 'react';
 import { ContentState, Project, Service, ContactInfo, Testimonial } from '../types';
 
 const DEFAULT_PROJECTS: Project[] = [
-  { 
-    id: 1, 
-    title: "Xây dựng thương hiệu cá nhân Facebook", 
-    description: "Xây dựng tuyến chủ đề bài viết chân thật, gần gũi. Định vị chuyên gia.", 
-    image: "https://i.postimg.cc/BnZfD0Lp/1.jpg", 
-    category: "Branding" 
+  {
+    id: 1,
+    title: "Xây dựng thương hiệu cá nhân Facebook",
+    description: "Xây dựng tuyến chủ đề bài viết chân thật, gần gũi. Định vị chuyên gia.",
+    image: "https://i.postimg.cc/3JxhTmGp/5.jpg",
+    category: "Branding"
   },
-  { 
-    id: 2, 
-    title: "Workshop AI FOR TRAINER", 
-    description: "Heona đảm nhận toàn bộ khâu tổ chức từ thiết kế nhận diện, setup không gian đến vận hành.", 
-    image: "https://i.postimg.cc/QdNZ539n/5.jpg", 
-    category: "Event" 
+  {
+    id: 2,
+    title: "Workshop AI FOR TRAINER",
+    description: "Heona đảm nhận toàn bộ khâu tổ chức từ thiết kế nhận diện, setup không gian đến vận hành.",
+    image: "https://i.postimg.cc/7YZ4k0z5/4.jpg",
+    category: "Event"
   },
-  { 
-    id: 3, 
-    title: "Xây dựng thương hiệu trên TIKTOK – “Tĩnh Khiêm Tarot”", 
-    description: "Tăng nhận diện chuyên gia Tarot, video viral cao nhất đạt triệu view.", 
-    image: "https://i.postimg.cc/QdNZ539q/2.jpg", 
-    category: "Tiktok" 
+  {
+    id: 3,
+    title: "Xây dựng thương hiệu trên TIKTOK – “Tĩnh Khiêm Tarot”",
+    description: "Tăng nhận diện chuyên gia Tarot, video viral cao nhất đạt triệu view.",
+    image: "https://i.postimg.cc/FsHv43Sk/1.jpg",
+    category: "Tiktok"
   },
-  { 
-    id: 4, 
-    title: "Lễ Ra Mắt Dự Án UNIHONE", 
-    description: "Sự kiện đánh dấu bước ngoặt hệ sinh thái UniHome. Phụ trách trọn gói ý tưởng, concept, media.", 
-    image: "https://i.postimg.cc/13R16Qnj/7.jpg", 
-    category: "Event" 
+  {
+    id: 4,
+    title: "Lễ Ra Mắt Dự Án UNIHONE",
+    description: "Sự kiện đánh dấu bước ngoặt hệ sinh thái UniHome. Phụ trách trọn gói ý tưởng, concept, media.",
+    image: "https://i.postimg.cc/RVZmBKtH/6.jpg",
+    category: "Event"
   },
-  { 
-    id: 5, 
-    title: "Xây dựng thương hiệu TRAINER THANH NGUYEN", 
-    description: "Hệ thống giao diện hình ảnh được làm mới hoàn toàn, chuyên nghiệp và uy tín.", 
-    image: "https://i.postimg.cc/bwYfbhD9/3.jpg", 
-    category: "Branding" 
+  {
+    id: 5,
+    title: "Xây dựng thương hiệu TRAINER THANH NGUYEN",
+    description: "Hệ thống giao diện hình ảnh được làm mới hoàn toàn, chuyên nghiệp và uy tín.",
+    image: "https://i.postimg.cc/7YZ4k0zf/2.jpg",
+    category: "Branding"
   },
-  { 
-    id: 7, 
-    title: "Đêm nhạc yêu thương 4", 
-    description: "Chương trình thiện nguyện lan tỏa Ánh Sáng & Tình Yêu Thương.", 
-    image: "https://i.postimg.cc/HkW15gc3/4.jpg", 
-    category: "Event" 
+  {
+    id: 7,
+    title: "Đêm nhạc yêu thương 4",
+    description: "Chương trình thiện nguyện lan tỏa Ánh Sáng & Tình Yêu Thương.",
+    image: "https://i.postimg.cc/qMvrTyKt/3.jpg",
+    category: "Event"
   },
-  { 
-    id: 8, 
-    title: "Livestream Talkshow Series", 
-    description: "Setup studio, ánh sáng và vận hành livestream đa điểm cầu chuyên nghiệp.", 
-    image: "https://i.postimg.cc/2SjNvDbM/6.jpg", 
-    category: "Livestream" 
+  {
+    id: 8,
+    title: "Livestream Talkshow Series",
+    description: "Setup studio, ánh sáng và vận hành livestream đa điểm cầu chuyên nghiệp.",
+    image: "https://i.postimg.cc/2SjNvDbM/6.jpg",
+    category: "Livestream"
   },
 ];
 
@@ -137,7 +137,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
 ];
 
 // Read-only context
-interface ContentContextType extends ContentState {}
+interface ContentContextType extends ContentState { }
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 

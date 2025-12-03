@@ -272,7 +272,7 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Testimonials Section (New) */}
-      <Section narrow className="py-16 bg-gradient-to-b from-[#0b0b0d]/50 to-[#08080a]/50">
+      <Section narrow className="relative py-16 bg-gradient-to-b from-[#0b0b0d]/50 to-[#08080a]/50">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
         <div className="text-center mb-12">
           <div className="text-xs font-mono text-primary uppercase tracking-widest mb-2">[ TESTIMONIALS ]</div>
@@ -306,7 +306,7 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Contact Info Section - Enhanced CTA */}
-      <Section narrow className="pt-8 pb-16 border-t border-white/5 bg-gradient-to-b from-[#0b0b0d]/50 to-[#08080a]/50">
+      <Section narrow className="relative pt-8 pb-16 border-t border-white/5 bg-gradient-to-b from-[#0b0b0d]/50 to-[#08080a]/50">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
         <div className="max-w-4xl mx-auto bg-[#111115] border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl relative overflow-hidden group">
           {/* Background Glow Effects */}
