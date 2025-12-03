@@ -63,7 +63,7 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
-              <h1 className="font-heading font-extrabold text-2xl md:text-4xl lg:text-[46px] leading-[1.1] mb-8 tracking-tight">
+              <h1 className="font-heading font-extrabold text-2xl md:text-4xl lg:text-[41px] leading-[3rem] mb-8 tracking-tight">
                 GIẢI PHÁP TRUYỀN THÔNG <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#9d7aff] to-secondary drop-shadow-[0_0_10px_rgba(111,58,255,0.5)]">
                   ĐỒNG BỘ & TOÀN DIỆN
