@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
+import { ProgressiveImage } from './ProgressiveImage';
 
 const NAV_LINKS = [
   { path: '/', label: 'Trang chủ' },
@@ -42,27 +43,29 @@ export const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || mobileMenuOpen
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen
           ? 'bg-[rgba(5,5,9,0.94)] backdrop-blur-md border-b border-white/5 py-3'
           : 'bg-transparent py-5'
-      }`}
+        }`}
     >
       <div className="max-w-[1200px] mx-auto px-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center gap-3 group" 
+          <Link
+            to="/"
+            className="flex items-center gap-3 group"
             onClick={(e) => handleLinkClick(e, '/')}
           >
-            <img 
-              src="https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg" 
-              alt="HEONA MEDIA"
-              className="w-10 h-10 rounded-full object-cover shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform border border-white/10"
-              width="40"
-              height="40"
-            />
+            <div className="w-10 h-10 rounded-full overflow-hidden shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform border border-white/10">
+              <ProgressiveImage
+                src="https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg"
+                alt="HEONA MEDIA"
+                className="w-full h-full object-cover"
+                width="40"
+                height="40"
+                delay={0}
+              />
+            </div>
             <div className="flex flex-col">
               <span className="font-heading text-sm uppercase tracking-[0.08em] text-white font-bold leading-none mb-1">
                 HEONA MEDIA
@@ -80,9 +83,8 @@ export const Header: React.FC = () => {
                 key={link.path}
                 to={link.path}
                 onClick={(e) => handleLinkClick(e, link.path)}
-                className={`px-3 py-2 rounded-full transition-all duration-300 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary ${
-                  location.pathname === link.path ? 'text-white' : 'text-textMuted'
-                }`}
+                className={`px-3 py-2 rounded-full transition-all duration-300 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary ${location.pathname === link.path ? 'text-white' : 'text-textMuted'
+                  }`}
               >
                 {link.label}
               </Link>
@@ -93,13 +95,13 @@ export const Header: React.FC = () => {
           <div className="hidden lg:flex items-center gap-5">
             {/* Hotline Desktop */}
             <a href="tel:0931899427" className="flex items-center gap-2.5 group">
-                <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                    <Phone size={16} className="animate-pulse-slow" />
-                </div>
-                <div className="flex flex-col">
-                   <span className="text-[10px] font-bold uppercase tracking-wider text-textMuted group-hover:text-secondary transition-colors">Hotline</span>
-                   <span className="text-sm font-bold text-white leading-none">0931 899 427</span>
-                </div>
+              <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                <Phone size={16} className="animate-pulse-slow" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-textMuted group-hover:text-secondary transition-colors">Hotline</span>
+                <span className="text-sm font-bold text-white leading-none">0931 899 427</span>
+              </div>
             </a>
 
             <Link
@@ -122,9 +124,8 @@ export const Header: React.FC = () => {
 
         {/* Mobile Nav */}
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            mobileMenuOpen ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'
-          }`}
+          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${mobileMenuOpen ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'
+            }`}
         >
           <nav className="flex flex-col gap-1 pt-3 border-t border-white/5">
             {NAV_LINKS.map((link) => (
@@ -132,21 +133,20 @@ export const Header: React.FC = () => {
                 key={link.path}
                 to={link.path}
                 onClick={(e) => handleLinkClick(e, link.path)}
-                className={`block py-2.5 px-4 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === link.path
+                className={`block py-2.5 px-4 rounded-lg text-sm font-medium transition-colors ${location.pathname === link.path
                     ? 'bg-white/5 text-white'
                     : 'text-textMuted hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
             ))}
             <div className="flex flex-col gap-3 mt-3 px-2 pb-2">
-              <a 
+              <a
                 href="tel:0931899427"
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-white/5 text-white text-sm font-bold border border-white/10 hover:bg-primary/20 hover:border-primary/50 transition-all"
               >
-                 <Phone size={16} /> 0931 899 427
+                <Phone size={16} /> 0931 899 427
               </a>
               <Link
                 to="/contact"

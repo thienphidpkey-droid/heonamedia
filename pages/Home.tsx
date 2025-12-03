@@ -5,6 +5,7 @@ import { Section } from '../components/Section';
 import { ArrowRight, Hexagon, Layers, Radio, Phone, Mail, MapPin, Quote, Star } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
 import { SEO } from '../components/SEO';
+import { ProgressiveImage } from '../components/ProgressiveImage';
 
 const HERO_IMAGES = [
   "https://i.postimg.cc/hvSh7Y9d/a1.jpg",
@@ -62,7 +63,7 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
-              <h1 className="font-heading font-extrabold text-2xl md:text-4xl lg:text-[47px] leading-[1.1] mb-8 tracking-tight">
+              <h1 className="font-heading font-extrabold text-2xl md:text-4xl lg:text-[46px] leading-[1.1] mb-8 tracking-tight">
                 GIẢI PHÁP TRUYỀN THÔNG <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#9d7aff] to-secondary drop-shadow-[0_0_10px_rgba(111,58,255,0.5)]">
                   ĐỒNG BỘ & TOÀN DIỆN
@@ -126,7 +127,7 @@ export const Home: React.FC = () => {
               <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] bg-bgSoft">
                 {/* Only render current slide for better performance */}
                 <div className="absolute inset-0">
-                  <img
+                  <ProgressiveImage
                     src={HERO_IMAGES[currentSlide]}
                     alt={HERO_ALTS[currentSlide]}
                     className="w-full h-full object-cover"
@@ -134,6 +135,7 @@ export const Home: React.FC = () => {
                     fetchPriority="high"
                     width="800"
                     height="600"
+                    delay={0}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-bgMain via-transparent to-transparent opacity-40"></div>
                 </div>
@@ -269,13 +271,14 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.slice(0, 4).map((item) => (
+          {projects.slice(0, 4).map((item, index) => (
             <div key={item.id} className="group relative aspect-video rounded-xl overflow-hidden border border-white/10 bg-bgCard hover:border-primary/50 transition-all duration-500">
-              <img
+              <ProgressiveImage
                 src={item.image}
                 alt={`Dự án ${item.title} - ${item.category} do Heona Media thực hiện`}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
+                delay={index * 100}
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90"></div>
@@ -318,7 +321,7 @@ export const Home: React.FC = () => {
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10">
                   {testimonial.avatar ? (
-                    <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                    <ProgressiveImage src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" delay={index * 50} />
                   ) : (
                     <div className="w-full h-full bg-white/10 flex items-center justify-center text-white font-bold text-lg">{testimonial.name.charAt(0)}</div>
                   )}
