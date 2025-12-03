@@ -124,22 +124,19 @@ export const Home: React.FC = () => {
               <div className="absolute -inset-3 border border-primary/20 rounded-xl skew-y-2 blur-sm opacity-50 group-hover:opacity-80 transition-opacity"></div>
 
               <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] bg-bgSoft">
-                {HERO_IMAGES.map((img, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                  >
-                    <img
-                      src={img}
-                      alt={HERO_ALTS[index]}
-                      className="w-full h-full object-cover"
-                      loading={index === 0 ? "eager" : "lazy"} // Optimize LCP
-                      width="800"
-                      height="600"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bgMain via-transparent to-transparent opacity-40"></div>
-                  </div>
-                ))}
+                {/* Only render current slide for better performance */}
+                <div className="absolute inset-0">
+                  <img
+                    src={HERO_IMAGES[currentSlide]}
+                    alt={HERO_ALTS[currentSlide]}
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                    width="800"
+                    height="600"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bgMain via-transparent to-transparent opacity-40"></div>
+                </div>
 
                 {/* Carousel Navigation Dots */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
@@ -148,8 +145,8 @@ export const Home: React.FC = () => {
                       key={index}
                       onClick={() => setCurrentSlide(index)}
                       className={`transition-all duration-300 ${index === currentSlide
-                          ? 'w-8 h-2 bg-primary rounded-full'
-                          : 'w-2 h-2 bg-white/30 hover:bg-white/50 rounded-full'
+                        ? 'w-8 h-2 bg-primary rounded-full'
+                        : 'w-2 h-2 bg-white/30 hover:bg-white/50 rounded-full'
                         }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
