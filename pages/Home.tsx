@@ -271,7 +271,7 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Testimonials Section (New) */}
-      <Section narrow className="py-16 bg-gradient-to-b from-[#0b0b0d] to-[#08080a]">
+      <Section narrow className="py-16 bg-gradient-to-b from-[#0b0b0d]/50 to-[#08080a]/50">
         <div className="text-center mb-12">
           <div className="text-xs font-mono text-primary uppercase tracking-widest mb-2">[ TESTIMONIALS ]</div>
           <h2 className="font-heading font-extrabold text-3xl md:text-4xl">KHÁCH HÀNG NÓI VỀ CHÚNG TÔI</h2>
@@ -304,7 +304,7 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Contact Info Section - Enhanced CTA */}
-      <Section narrow className="pt-8 pb-16 border-t border-white/5 bg-[#08080a]">
+      <Section narrow className="pt-8 pb-16 border-t border-white/5 bg-[#08080a]/50">
         <div className="max-w-4xl mx-auto bg-[#111115] border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl relative overflow-hidden group">
           {/* Background Glow Effects */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 blur-[80px] -z-10 rounded-full group-hover:bg-primary/30 transition-colors duration-700"></div>
