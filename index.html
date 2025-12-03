@@ -4,157 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#050507" />
+    
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com;" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- SEO -->
     <meta name="description" content="HEONA MEDIA – Đơn vị tổ chức sự kiện & sản xuất media chuyên nghiệp tại TP.HCM. Giải pháp toàn diện từ ý tưởng, thi công đến truyền thông thương hiệu." />
+    <meta name="keywords" content="Tổ chức sự kiện, Event Agency, Media Production, Livestream, Quay phim sự kiện, Xây dựng thương hiệu, TP.HCM" />
     <meta name="author" content="HEONA MEDIA" />
     <meta name="robots" content="index, follow" />
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://heonamedia.com/" />
+    <meta property="og:title" content="HEONA MEDIA – Tổ chức sự kiện & Media Production" />
+    <meta property="og:description" content="HEONA MEDIA – Đơn vị tổ chức sự kiện & sản xuất media chuyên nghiệp tại TP.HCM." />
+    <meta property="og:image" content="https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://heonamedia.com/" />
+    <meta property="twitter:title" content="HEONA MEDIA – Tổ chức sự kiện & Media Production" />
+    <meta property="twitter:description" content="HEONA MEDIA – Đơn vị tổ chức sự kiện & sản xuất media chuyên nghiệp tại TP.HCM." />
+    <meta property="twitter:image" content="https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg" />
+
     <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/nck9qgG5/481456887-122109905270769501-305987371640573178-n.jpg" />
-    
     <title>HEONA MEDIA – Tổ chức sự kiện & Media Production</title>
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://i.postimg.cc" />
-    
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: '#6f3aff',
-              secondary: '#ff7a33',
-              bgMain: '#0b0b0d',
-              bgSoft: '#15151b',
-              bgCard: 'rgba(15, 15, 20, 0.7)', 
-              borderSubtle: 'rgba(255, 255, 255, 0.08)',
-              textMain: '#f4f4f6',
-              textMuted: '#a0a0b4',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              heading: ['Montserrat', 'sans-serif'],
-              mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
-            },
-            animation: {
-              'fade-in': 'fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-              'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-              'pulse-slow': 'pulseSlow 6s ease-in-out infinite',
-              'float': 'float 8s ease-in-out infinite',
-              'glow': 'glow 3s ease-in-out infinite alternate',
-            },
-            keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0', transform: 'translateY(10px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              slideUp: {
-                '0%': { opacity: '0', transform: 'translateY(40px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              pulseSlow: {
-                '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-                '50%': { opacity: '0.7', transform: 'scale(1.05)' },
-              },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-15px)' },
-              },
-              glow: {
-                '0%': { boxShadow: '0 0 5px rgba(111, 58, 255, 0.2)' },
-                '100%': { boxShadow: '0 0 20px rgba(111, 58, 255, 0.6)' },
-              }
-            },
-            backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-              'cyber-grid': 'linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
-            }
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        background-color: #050507;
-        color: #f4f4f6;
-        overflow-x: hidden;
-      }
-      
-      /* Futuristic Grid Background */
-      .bg-tech-grid {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background-size: 40px 40px;
-        background-image: 
-          linear-gradient(to right, rgba(111, 58, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(111, 58, 255, 0.03) 1px, transparent 1px);
-        mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-        pointer-events: none;
-      }
-
-      /* Scan line effect */
-      .scan-lines {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05));
-        background-size: 100% 4px;
-        z-index: 9999;
-        pointer-events: none;
-        opacity: 0.15;
-      }
-
-      .ambient-glow {
-        position: fixed;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: -1;
-        filter: blur(80px);
-      }
-
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0b0b0d;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #262626;
-        border-radius: 3px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #6f3aff;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
-    "vite": "https://aistudiocdn.com/vite@^7.2.4",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "react-helmet-async": "https://aistudiocdn.com/react-helmet-async@^2.0.5",
-    "@emailjs/browser": "https://aistudiocdn.com/@emailjs/browser@^4.4.1",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
