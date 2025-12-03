@@ -47,97 +47,100 @@ export const Home: React.FC = () => {
         <div className="absolute bottom-10 left-5 w-4 h-4 border-b border-l border-white/20" />
         <div className="absolute bottom-10 right-5 w-4 h-4 border-b border-r border-white/20" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 items-start relative z-10">
-          {/* Left Content */}
-          <div className="animate-slide-up relative">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="flex h-2.5 w-2.5 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
-              </span>
-              <div className="text-xs uppercase tracking-[0.2em] text-secondary font-mono font-bold">
-                Tổ chức sự kiện • Sản xuất media
-              </div>
-            </div>
-
-            <h1 className="font-heading font-extrabold text-2xl md:text-4xl lg:text-5xl leading-[1.1] mb-8 tracking-tight">
-              GIẢI PHÁP TRUYỀN THÔNG <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#9d7aff] to-secondary drop-shadow-[0_0_10px_rgba(111,58,255,0.5)]">
-                ĐỒNG BỘ & TOÀN DIỆN
-              </span>
-            </h1>
-
-            <div className="flex flex-col gap-8 mb-10">
-              {/* Event Description Block */}
-              <div className="pl-5 border-l-4 border-primary/50 hover:border-primary transition-colors duration-300">
-                <h3 className="font-heading font-bold text-white text-xl mb-2 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                  Tổ chức sự kiện chuyên nghiệp
-                </h3>
-                <p className="text-textMuted text-base mb-3 leading-relaxed">
-                  Từ khai trương, hội nghị đến Year End Party, HEONA MEDIA xây dựng trải nghiệm sự kiện rõ ràng, kiểm soát tốt chất lượng và ngân sách.
-                </p>
-                <div className="bg-white/5 p-3 rounded border border-white/5 text-white/90 italic text-xs">
-                  “Tư duy sản xuất tinh gọn, đội ngũ kỹ thuật lành nghề và phong cách làm việc kỷ luật.”
-                </div>
-              </div>
-
-              {/* Personal Branding Description Block */}
-              <div className="pl-5 border-l-4 border-secondary/50 hover:border-secondary transition-colors duration-300">
-                <h3 className="font-heading font-bold text-white text-xl mb-2 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-                  Xây dựng Nhân hiệu cá nhân
-                </h3>
-                <p className="text-textMuted text-base mb-3 leading-relaxed">
-                  Đồng hành từ gốc rễ: khai mở giá trị thật, định hình phong cách riêng và tạo hệ sinh thái nội dung giúp bạn tỏa sáng bền vững.
-                </p>
-                <div className="bg-white/5 p-3 rounded border border-white/5 text-textMuted text-xs italic">
-                  Không phô diễn, không màu mè, chỉ là chính bạn nhưng phiên bản rõ ràng hơn, sâu sắc hơn.
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4 mb-10">
-              <Link to="/projects" className="group relative px-8 py-4 rounded-none clip-path-slant bg-white text-bgMain font-bold text-sm transition-all hover:bg-secondary hover:text-white overflow-hidden" aria-label="Khám phá các dự án tiêu biểu của Heona Media">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                <span className="relative z-10 flex items-center gap-2">
-                  XEM DỰ ÁN <ArrowRight size={16} />
+        {/* Semi-transparent overlay for hero content */}
+        <div className="relative z-10 bg-white/[0.03] backdrop-blur-sm rounded-2xl p-6 md:p-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
+            {/* Left Content */}
+            <div className="animate-slide-up relative">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="flex h-2.5 w-2.5 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
                 </span>
-              </Link>
-              <Link to="/contact" className="px-8 py-4 rounded-none clip-path-slant border border-white/20 bg-white/5 backdrop-blur text-white font-bold text-sm hover:bg-secondary hover:border-secondary hover:shadow-lg hover:shadow-secondary/20 transition-all duration-300" aria-label="Liên hệ nhận báo giá dịch vụ">
-                NHẬN BÁO GIÁ NHANH
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap gap-6 text-xs text-textMuted font-mono tracking-tight pt-6 border-t border-white/5">
-              <span className="flex items-center gap-2"><Layers size={16} className="text-primary" /> Thi công sân khấu</span>
-              <span className="flex items-center gap-2"><Radio size={16} className="text-primary" /> Livestream – Media</span>
-              <span className="flex items-center gap-2"><Hexagon size={16} className="text-primary" /> Chi phí minh bạch</span>
-            </div>
-          </div>
-
-          {/* Right Visual (Slider) */}
-          <div className="relative animate-fade-in delay-200 group perspective-1000 sticky top-24">
-            <div className="absolute -inset-3 border border-white/5 rounded-xl skew-y-2 group-hover:skew-y-1 transition-transform duration-700"></div>
-            <div className="absolute -inset-3 border border-primary/20 rounded-xl skew-y-2 blur-sm opacity-50 group-hover:opacity-80 transition-opacity"></div>
-
-            <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] bg-bgSoft">
-              {HERO_IMAGES.map((img, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                >
-                  <img
-                    src={img}
-                    alt={HERO_ALTS[index]}
-                    className="w-full h-full object-cover"
-                    loading={index === 0 ? "eager" : "lazy"} // Optimize LCP
-                    width="800"
-                    height="600"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bgMain via-transparent to-transparent opacity-40"></div>
+                <div className="text-xs uppercase tracking-[0.2em] text-secondary font-mono font-bold">
+                  Tổ chức sự kiện • Sản xuất media
                 </div>
-              ))}
+              </div>
+
+              <h1 className="font-heading font-extrabold text-2xl md:text-4xl lg:text-5xl leading-[1.1] mb-8 tracking-tight">
+                GIẢI PHÁP TRUYỀN THÔNG <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#9d7aff] to-secondary drop-shadow-[0_0_10px_rgba(111,58,255,0.5)]">
+                  ĐỒNG BỘ & TOÀN DIỆN
+                </span>
+              </h1>
+
+              <div className="flex flex-col gap-8 mb-10">
+                {/* Event Description Block */}
+                <div className="pl-5 border-l-4 border-primary/50 hover:border-primary transition-colors duration-300">
+                  <h3 className="font-heading font-bold text-white text-xl mb-2 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Tổ chức sự kiện chuyên nghiệp
+                  </h3>
+                  <p className="text-textMuted text-base mb-3 leading-relaxed">
+                    Từ khai trương, hội nghị đến Year End Party, HEONA MEDIA xây dựng trải nghiệm sự kiện rõ ràng, kiểm soát tốt chất lượng và ngân sách.
+                  </p>
+                  <div className="bg-white/5 p-3 rounded border border-white/5 text-white/90 italic text-xs">
+                    “Tư duy sản xuất tinh gọn, đội ngũ kỹ thuật lành nghề và phong cách làm việc kỷ luật.”
+                  </div>
+                </div>
+
+                {/* Personal Branding Description Block */}
+                <div className="pl-5 border-l-4 border-secondary/50 hover:border-secondary transition-colors duration-300">
+                  <h3 className="font-heading font-bold text-white text-xl mb-2 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    Xây dựng Nhân hiệu cá nhân
+                  </h3>
+                  <p className="text-textMuted text-base mb-3 leading-relaxed">
+                    Đồng hành từ gốc rễ: khai mở giá trị thật, định hình phong cách riêng và tạo hệ sinh thái nội dung giúp bạn tỏa sáng bền vững.
+                  </p>
+                  <div className="bg-white/5 p-3 rounded border border-white/5 text-textMuted text-xs italic">
+                    Không phô diễn, không màu mè, chỉ là chính bạn nhưng phiên bản rõ ràng hơn, sâu sắc hơn.
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-4 mb-10">
+                <Link to="/projects" className="group relative px-8 py-4 rounded-none clip-path-slant bg-white text-bgMain font-bold text-sm transition-all hover:bg-secondary hover:text-white overflow-hidden" aria-label="Khám phá các dự án tiêu biểu của Heona Media">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+                  <span className="relative z-10 flex items-center gap-2">
+                    XEM DỰ ÁN <ArrowRight size={16} />
+                  </span>
+                </Link>
+                <Link to="/contact" className="px-8 py-4 rounded-none clip-path-slant border border-white/20 bg-white/5 backdrop-blur text-white font-bold text-sm hover:bg-secondary hover:border-secondary hover:shadow-lg hover:shadow-secondary/20 transition-all duration-300" aria-label="Liên hệ nhận báo giá dịch vụ">
+                  NHẬN BÁO GIÁ NHANH
+                </Link>
+              </div>
+
+              <div className="flex flex-wrap gap-6 text-xs text-textMuted font-mono tracking-tight pt-6 border-t border-white/5">
+                <span className="flex items-center gap-2"><Layers size={16} className="text-primary" /> Thi công sân khấu</span>
+                <span className="flex items-center gap-2"><Radio size={16} className="text-primary" /> Livestream – Media</span>
+                <span className="flex items-center gap-2"><Hexagon size={16} className="text-primary" /> Chi phí minh bạch</span>
+              </div>
+            </div>
+
+            {/* Right Visual (Slider) */}
+            <div className="relative animate-fade-in delay-200 group perspective-1000 sticky top-24">
+              <div className="absolute -inset-3 border border-white/5 rounded-xl skew-y-2 group-hover:skew-y-1 transition-transform duration-700"></div>
+              <div className="absolute -inset-3 border border-primary/20 rounded-xl skew-y-2 blur-sm opacity-50 group-hover:opacity-80 transition-opacity"></div>
+
+              <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] bg-bgSoft">
+                {HERO_IMAGES.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                  >
+                    <img
+                      src={img}
+                      alt={HERO_ALTS[index]}
+                      className="w-full h-full object-cover"
+                      loading={index === 0 ? "eager" : "lazy"} // Optimize LCP
+                      width="800"
+                      height="600"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bgMain via-transparent to-transparent opacity-40"></div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -276,7 +279,7 @@ export const Home: React.FC = () => {
 
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <div key={testimonial.id} className="bg-[#111115] border border-white/5 p-8 rounded-xl relative hover:border-primary/30 transition-colors duration-300">
+            <div key={testimonial.id} className="bg-[#111115]/50 border border-white/5 p-8 rounded-xl relative hover:border-primary/30 transition-colors duration-300">
               <Quote size={40} className="absolute top-6 right-6 text-white/5" />
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10">
