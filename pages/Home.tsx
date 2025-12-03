@@ -271,7 +271,7 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Testimonials Section (New) */}
-      <Section narrow className="py-16 bg-gradient-to-b from-[#0b0b0d]/50 to-[#08080a]/50">
+      <Section narrow className="py-16">
         <div className="text-center mb-12">
           <div className="text-xs font-mono text-primary uppercase tracking-widest mb-2">[ TESTIMONIALS ]</div>
           <h2 className="font-heading font-extrabold text-3xl md:text-4xl">KHÁCH HÀNG NÓI VỀ CHÚNG TÔI</h2>
