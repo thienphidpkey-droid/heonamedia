@@ -67,7 +67,7 @@ export const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
                     src={src}
                     alt={alt}
                     loading={loading}
-                    fetchPriority={fetchPriority}
+                    {...{ fetchpriority: fetchPriority }}
                     width={width}
                     height={height}
                     className={`${className} transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'

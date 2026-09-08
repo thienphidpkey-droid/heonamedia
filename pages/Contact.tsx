@@ -7,6 +7,7 @@ import { useContent } from '../context/ContentContext';
 import emailjs from '@emailjs/browser';
 import { SEO } from '../components/SEO';
 import { ZaloIcon } from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 // Đảm bảo các ID này đúng với trong EmailJS Dashboard của bạn
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -35,6 +36,12 @@ export const Contact: React.FC = () => {
         e.preventDefault();
 
         if (!form.current) return;
+
+        if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+            setSubmitStatus('error');
+            setErrorMessage('Kênh gửi email đang tạm thời gián đoạn. Vui lòng liên hệ qua hotline.');
+            return;
+        }
 
         // Anti-spam Honeypot Check: bot fills invisible trap input
         const botTrap = form.current.elements.namedItem('website_bot_trap') as HTMLInputElement | null;
@@ -74,10 +81,7 @@ export const Contact: React.FC = () => {
                     setIsSubmitting(false);
                     setSubmitStatus('error');
                     // Lấy thông báo lỗi cụ thể để hiển thị
-                    setErrorMessage(error.text || "Lỗi kết nối đến dịch vụ Email.");
-
-                    // Hiển thị alert để người dùng biết ngay lập tức
-                    alert(`Gửi thất bại: ${error.text}. Vui lòng kiểm tra lại Service ID hoặc kết nối Gmail.`);
+                    setErrorMessage('Không thể gửi yêu cầu lúc này. Vui lòng thử lại hoặc liên hệ hotline.');
                 },
             );
     };
@@ -201,6 +205,8 @@ export const Contact: React.FC = () => {
                                         type="text"
                                         name="name"
                                         required
+                                        minLength={2}
+                                        maxLength={100}
                                         placeholder="Nhập họ tên..."
                                         className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                                     />
@@ -210,6 +216,7 @@ export const Contact: React.FC = () => {
                                     <input
                                         type="text"
                                         name="company"
+                                        maxLength={150}
                                         placeholder="Tên công ty..."
                                         className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                                     />
@@ -223,6 +230,10 @@ export const Contact: React.FC = () => {
                                         type="tel"
                                         name="phone"
                                         required
+                                        inputMode="tel"
+                                        minLength={8}
+                                        maxLength={20}
+                                        pattern="[0-9+(). -]{8,20}"
                                         placeholder="SĐT liên hệ..."
                                         className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                                     />
@@ -233,6 +244,7 @@ export const Contact: React.FC = () => {
                                         type="email"
                                         name="email"
                                         required
+                                        maxLength={254}
                                         placeholder="Email..."
                                         className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all"
                                     />
@@ -273,10 +285,21 @@ export const Contact: React.FC = () => {
                                 <label className="text-xs text-textMuted font-medium">Nội dung yêu cầu</label>
                                 <textarea
                                     name="message"
+                                    required
+                                    minLength={10}
+                                    maxLength={2000}
                                     placeholder="Mô tả chi tiết..."
                                     className="bg-[#111116] border border-borderSubtle rounded-lg px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:bg-[#15151c] transition-all min-h-[120px]"
                                 ></textarea>
                             </div>
+
+                            <label className="flex items-start gap-3 text-xs text-textMuted leading-relaxed">
+                                <input type="checkbox" name="privacy_consent" required className="mt-0.5 accent-primary" />
+                                <span>
+                                    Tôi đồng ý để HEONA MEDIA sử dụng thông tin trên nhằm phản hồi yêu cầu theo{' '}
+                                    <Link to="/privacy" className="text-primary hover:underline">chính sách quyền riêng tư</Link>.
+                                </span>
+                            </label>
 
                             <div className="pt-1">
                                 {submitStatus === 'success' && (

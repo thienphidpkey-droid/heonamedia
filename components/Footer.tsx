@@ -2,6 +2,7 @@
 import React from 'react';
 import { Facebook, Youtube, Phone, Mail } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
+import { Link } from 'react-router-dom';
 
 // Zalo Icon Component - Exported for reuse
 export const ZaloIcon = ({ size = 16, className = "" }: { size?: number; className?: string }) => (
@@ -43,6 +44,9 @@ export const Footer: React.FC = () => {
                     <Mail size={16} className="group-hover:text-primary transition-colors" />
                     <span>{contactInfo.email}</span>
                  </a>
+                 <Link to="/privacy" className="text-xs text-textMuted hover:text-primary transition-colors w-fit">
+                    Chính sách quyền riêng tư
+                 </Link>
             </div>
           </div>
 

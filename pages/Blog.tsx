@@ -1,20 +1,20 @@
 
-import React, { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { PageHero, Section } from '../components/Section';
 import { BlogPost } from '../types';
-import { X, Calendar, User, Clock, ArrowRight } from 'lucide-react';
-import { SEO } from '../components/SEO';
+import { Calendar, User, ArrowLeft, ArrowRight } from 'lucide-react';
+import { DOMAIN, SEO } from '../components/SEO';
 import { ProgressiveImage } from '../components/ProgressiveImage';
 
 const POSTS: BlogPost[] = [
   {
     id: 1,
+    slug: 'checklist-to-chuc-su-kien',
     tag: 'Checklist',
     title: 'Checklist tổ chức sự kiện cơ bản',
     meta: 'Các hạng mục căn bản để sự kiện vận hành trơn tru.',
-    date: '10/02/2025',
+    date: '2025-02-10',
     author: 'Admin Heona',
     image: '/images/hero-2.webp',
     content: `
@@ -41,10 +41,11 @@ const POSTS: BlogPost[] = [
   },
   {
     id: 2,
+    slug: 'chi-phi-to-chuc-hoi-nghi',
     tag: 'Chi phí',
     title: 'Chi phí tổ chức hội nghị gồm những gì?',
     meta: 'Phân nhóm chi phí rõ ràng – minh bạch.',
-    date: '12/02/2025',
+    date: '2025-02-12',
     author: 'Admin Heona',
     image: '/images/hero-3.webp',
     content: `
@@ -69,10 +70,11 @@ const POSTS: BlogPost[] = [
   },
   {
     id: 3,
+    slug: 'cach-chon-man-hinh-led',
     tag: 'Thiết bị',
     title: 'Cách chọn màn hình LED phù hợp',
     meta: 'Chọn P3, P4 hay P5 theo quy mô sân khấu?',
-    date: '15/02/2025',
+    date: '2025-02-15',
     author: 'Kỹ thuật Heona',
     image: '/images/hero-2.webp',
     content: `
@@ -95,10 +97,11 @@ const POSTS: BlogPost[] = [
   },
   {
     id: 4,
+    slug: 'quy-trinh-livestream-su-kien',
     tag: 'Livestream',
     title: 'Livestream sự kiện: quy trình chuẩn',
     meta: 'Chuẩn bị thiết bị, ánh sáng và đường truyền.',
-    date: '18/02/2025',
+    date: '2025-02-18',
     author: 'Media Team',
     image: '/images/hero-3.webp',
     content: `
@@ -119,10 +122,11 @@ const POSTS: BlogPost[] = [
   },
   {
     id: 5,
+    slug: 'loi-thuong-gap-khi-tu-to-chuc-su-kien',
     tag: 'Kinh nghiệm',
     title: '5 lỗi thường gặp khi tự tổ chức sự kiện',
     meta: 'Những lỗi nhỏ nhưng ảnh hưởng trải nghiệm.',
-    date: '20/02/2025',
+    date: '2025-02-20',
     author: 'Admin Heona',
     image: '/images/hero-2.webp',
     content: `
@@ -147,10 +151,11 @@ const POSTS: BlogPost[] = [
   },
   {
     id: 6,
+    slug: 'lam-viec-voi-agency-su-kien',
     tag: 'Thực tế',
     title: 'Làm việc với agency sự kiện: cần chuẩn bị gì?',
     meta: 'Checklist trước khi gửi brief.',
-    date: '22/02/2025',
+    date: '2025-02-22',
     author: 'Admin Heona',
     image: '/images/hero-3.webp',
     content: `
@@ -169,78 +174,68 @@ const POSTS: BlogPost[] = [
   },
 ];
 
+export const BLOG_POSTS = POSTS;
+
+const formatDate = (date?: string) => {
+  if (!date) return '';
+  return new Intl.DateTimeFormat('vi-VN').format(new Date(`${date}T00:00:00+07:00`));
+};
+
 export const Blog: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { slug } = useParams<{ slug?: string }>();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-
-  const postIdParam = searchParams.get('id');
-
-  // Synchronize URL search params with selectedPost
-  useEffect(() => {
-    if (postIdParam) {
-      const found = POSTS.find(p => p.id === Number(postIdParam));
-      if (found) {
-        setSelectedPost(found);
-      }
-    } else {
-      setSelectedPost(null);
-    }
-  }, [postIdParam]);
+  const legacyPostId = searchParams.get('id');
+  const selectedPost = slug ? POSTS.find(post => post.slug === slug) : undefined;
+  const legacyPost = legacyPostId ? POSTS.find(post => post.id === Number(legacyPostId)) : undefined;
 
   useEffect(() => {
-    if (selectedPost) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+    if (!slug && legacyPost) {
+      navigate(`/blog/${legacyPost.slug}`, { replace: true });
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [selectedPost]);
+  }, [legacyPost, navigate, slug]);
 
-  const handleOpenPost = (post: BlogPost) => {
-    setSearchParams({ id: post.id.toString() });
-  };
-
-  const handleClosePost = () => {
-    setSearchParams({});
-  };
+  const canonicalPath = selectedPost ? `/blog/${selectedPost.slug}` : '/blog';
 
   return (
     <>
       <SEO
         title={selectedPost ? selectedPost.title : "Blog Sự Kiện & Truyền Thông"}
         description={selectedPost ? selectedPost.meta : "Chia sẻ kinh nghiệm tổ chức sự kiện, kiến thức âm thanh ánh sáng, kỹ thuật livestream và checklist sự kiện từ đội ngũ Heona Media."}
-        url={selectedPost ? `/blog?id=${selectedPost.id}` : "/blog"}
+        url={canonicalPath}
         image={selectedPost?.image}
         type={selectedPost ? "article" : "website"}
         customSchema={selectedPost ? {
           "@type": "BlogPosting",
-          "@id": `https://heonamedia.com/blog?id=${selectedPost.id}#article`,
+          "@id": `https://www.heonamedia.com${canonicalPath}#article`,
           "headline": selectedPost.title,
           "description": selectedPost.meta,
-          "image": selectedPost.image,
+          "image": selectedPost.image ? `${DOMAIN}${selectedPost.image}` : `${DOMAIN}/images/logo.webp`,
           "datePublished": selectedPost.date,
+          "dateModified": selectedPost.date,
           "author": {
             "@type": "Organization",
             "name": "HEONA MEDIA"
           },
           "publisher": {
-            "@id": "https://heonamedia.com/#organization"
+            "@id": "https://www.heonamedia.com/#organization"
           },
-          "mainEntityOfPage": `https://heonamedia.com/blog?id=${selectedPost.id}`
+          "mainEntityOfPage": `https://www.heonamedia.com${canonicalPath}`
         } : undefined}
       />
-      <PageHero title="Blog – Chia sẻ kinh nghiệm" sub="Các bài viết hướng dẫn, checklist và kinh nghiệm thực tế trong ngành sự kiện – media." />
+      <PageHero
+        title={selectedPost ? selectedPost.title : 'Blog – Chia sẻ kinh nghiệm'}
+        sub={selectedPost ? selectedPost.meta : 'Các bài viết hướng dẫn, checklist và kinh nghiệm thực tế trong ngành sự kiện – media.'}
+      />
 
-      <Section narrow>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
-          {POSTS.map((post, index) => (
-            <div
+      {!selectedPost && !slug ? (
+        <Section narrow>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
+            {POSTS.map((post, index) => (
+            <Link
               key={post.id}
-              onClick={() => handleOpenPost(post)}
-              className="group bg-bgCard border border-borderSubtle rounded-xl overflow-hidden hover:border-primary hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(111,58,255,0.2)] transition-all duration-300 cursor-pointer flex flex-col h-full relative"
+              to={`/blog/${post.slug}`}
+              className="group bg-bgCard border border-borderSubtle rounded-xl overflow-hidden hover:border-primary hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(111,58,255,0.2)] transition-all duration-300 flex flex-col h-full relative"
             >
               <div className="h-24 md:h-48 w-full overflow-hidden relative">
                 {post.image && (
@@ -269,53 +264,30 @@ export const Blog: React.FC = () => {
                 </p>
 
                 <div className="mt-auto pt-2 md:pt-3 border-t border-white/5 flex items-center justify-between text-[8px] md:text-[10px] text-textMuted/60 font-mono">
-                  <span>{post.date}</span>
+                  <time dateTime={post.date}>{formatDate(post.date)}</time>
                   <span className="flex items-center gap-1 group-hover:text-primary transition-colors">
                     Đọc thêm <ArrowRight size={10} className="md:w-3.5 md:h-3.5" />
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
-        </div>
-      </Section>
-
-      {selectedPost && createPortal(
-        <div
-          className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center p-0 md:p-4 animate-fade-in overflow-hidden"
-          onClick={handleClosePost}
-        >
-          <div
-            className="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-2xl bg-[#111115] md:rounded-2xl border border-white/10 shadow-2xl flex flex-col animate-slide-up"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between p-5 md:p-6 border-b border-white/10 bg-[#111115] z-10">
-              <div className="pr-8">
-                <span className="inline-block px-2.5 py-1 rounded bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-2 border border-primary/20">
-                  {selectedPost.tag}
-                </span>
-                <h2 className="font-heading font-bold text-2xl md:text-2xl text-white leading-tight">
-                  {selectedPost.title}
-                </h2>
-                <div className="flex items-center gap-5 mt-3 text-xs text-textMuted">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar size={12} /> {selectedPost.date}
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <User size={12} /> {selectedPost.author}
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={handleClosePost}
-                className="p-1.5 rounded-full bg-white/5 hover:bg-red-500 hover:text-white text-textMuted transition-colors"
-                aria-label="Đóng chi tiết bài viết"
-              >
-                <X size={20} />
-              </button>
+          </div>
+        </Section>
+      ) : selectedPost ? (
+        <Section narrow>
+          <article className="max-w-3xl mx-auto bg-[#111115] rounded-2xl border border-white/10 p-5 md:p-8 shadow-2xl">
+            <div className="flex flex-wrap items-center gap-5 mb-6 text-xs text-textMuted">
+              <span className="inline-block px-2.5 py-1 rounded bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/20">
+                {selectedPost.tag}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Calendar size={12} /> <time dateTime={selectedPost.date}>{formatDate(selectedPost.date)}</time>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <User size={12} /> {selectedPost.author}
+              </span>
             </div>
-
-            <div className="overflow-y-auto p-5 md:p-6 custom-scrollbar">
               {selectedPost.image && (
                 <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden mb-6 border border-white/10 shadow-lg relative">
                   <ProgressiveImage
@@ -337,23 +309,23 @@ export const Blog: React.FC = () => {
                 <div dangerouslySetInnerHTML={{ __html: selectedPost.content || '' }} />
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10 text-center">
+              <div className="mt-8 pt-6 border-t border-white/10 text-center space-y-4">
                 <p className="text-textMuted mb-3 text-sm">Bạn cần tư vấn chi tiết về chủ đề này?</p>
-                <button
-                  onClick={() => {
-                    handleClosePost();
-                    navigate('/contact');
-                  }}
+                <Link
+                  to="/contact"
                   className="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-sm font-bold hover:shadow-lg hover:shadow-primary/25 transition-all"
                 >
                   Liên hệ HEONA MEDIA ngay
-                </button>
+                </Link>
+                <div>
+                  <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-textMuted hover:text-primary transition-colors">
+                    <ArrowLeft size={14} /> Quay lại danh sách bài viết
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+          </article>
+        </Section>
+      ) : null}
     </>
   );
 };

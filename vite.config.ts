@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/', // Quan trọng để hoạt động đúng với BrowserRouter khi refresh trang
+  ssr: {
+    noExternal: ['react-helmet-async'],
+  },
 })

@@ -43,4 +43,4 @@ User-agent: Diffbot
 Allow: /
 
 # Sitemap Specification
-Sitemap: https://heonamedia.com/sitemap.xml
+Sitemap: https://www.heonamedia.com/sitemap.xml

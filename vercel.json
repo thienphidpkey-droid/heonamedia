@@ -1,4 +1,14 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/blog", "has": [{ "type": "query", "key": "id", "value": "1" }], "destination": "/blog/checklist-to-chuc-su-kien", "permanent": true },
+    { "source": "/blog", "has": [{ "type": "query", "key": "id", "value": "2" }], "destination": "/blog/chi-phi-to-chuc-hoi-nghi", "permanent": true },
+    { "source": "/blog", "has": [{ "type": "query", "key": "id", "value": "3" }], "destination": "/blog/cach-chon-man-hinh-led", "permanent": true },
+    { "source": "/blog", "has": [{ "type": "query", "key": "id", "value": "4" }], "destination": "/blog/quy-trinh-livestream-su-kien", "permanent": true },
+    { "source": "/blog", "has": [{ "type": "query", "key": "id", "value": "5" }], "destination": "/blog/loi-thuong-gap-khi-tu-to-chuc-su-kien", "permanent": true },
+    { "source": "/blog", "has": [{ "type": "query", "key": "id", "value": "6" }], "destination": "/blog/lam-viec-voi-agency-su-kien", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -29,7 +39,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://i.postimg.cc; connect-src 'self' https://api.emailjs.com; upgrade-insecure-requests;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://i.postimg.cc; connect-src 'self' https://api.emailjs.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests;"
         }
       ]
     },
@@ -58,12 +68,6 @@
           "value": "*"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ]
 }

@@ -13,60 +13,27 @@ interface SEOProps {
   url?: string;
   type?: string;
   keywords?: string;
+  robots?: string;
   faq?: FAQItem[];
   customSchema?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const DOMAIN = 'https://heonamedia.com'; 
-
-const DEFAULT_FAQS: FAQItem[] = [
-  {
-    question: "HEONA MEDIA là gì và cung cấp những dịch vụ nào?",
-    answer: "CÔNG TY TNHH TRUYỀN THÔNG HEONA MEDIA (thành lập 12/02/2025 tại TP.HCM) là đơn vị truyền thông thực chiến chuyên về Tổ chức sự kiện trọn gói, Xây dựng thương hiệu cá nhân (nhân hiệu), Sản xuất media (Quay phim, Livestream chuyên nghiệp) và Chụp ảnh profile cá nhân/doanh nhân."
-  },
-  {
-    question: "HEONA MEDIA có địa chỉ ở đâu và thông tin liên hệ như thế nào?",
-    answer: "HEONA MEDIA có trụ sở tại 45/30 đường số 1, Phường Thống Tây Hội (Phường 11 cũ), Quận Gò Vấp, TP. Hồ Chí Minh. Hotline/Zalo: 0931 899 427, Email: heonamedia@gmail.com, Website chính thức: https://heonamedia.com."
-  },
-  {
-    question: "Dịch vụ Tổ chức sự kiện tại HEONA MEDIA bao gồm những loại hình nào?",
-    answer: "HEONA MEDIA tổ chức sự kiện trọn gói từ kịch bản, thiết kế thi công sân khấu đến vận hành cho các loại hình: Lễ khai trương – khánh thành, Hội nghị – hội thảo – họp báo, Tiệc tất niên (Year End Party), Team Building & Tour Retreat, Activation – Roadshow, Lễ ra mắt sản phẩm mới."
-  },
-  {
-    question: "Dịch vụ Xây dựng Thương hiệu cá nhân (Nhân hiệu) tại HEONA MEDIA gồm những gì?",
-    answer: "Dịch vụ xây dựng nhân hiệu trọn gói gồm: (1) Tư vấn & định hình thông điệp phong cách cá nhân; (2) Sản xuất nội dung chuyên sâu (bài viết, video, podcast); (3) Xây kênh social (Facebook, TikTok, Group); (4) Coaching 1:1 xuất hiện tự tin & thuyết phục; (5) Chụp ảnh profile & quay series video nhân hiệu."
-  },
-  {
-    question: "Chi phí tổ chức sự kiện tại HEONA MEDIA là bao nhiêu?",
-    answer: "Giá dịch vụ tổ chức sự kiện minh bạch theo ngân sách: Gói cơ bản (sự kiện nhỏ/vừa) từ 8.000.000đ; Gói chuyên nghiệp (doanh nghiệp) từ 25.000.000đ; Gói toàn diện trọn gói từ 60.000.000đ. HEONA MEDIA cam kết báo giá chi tiết, không phát sinh chi phí ẩn."
-  },
-  {
-    question: "HEONA MEDIA có dịch vụ chụp ảnh profile cá nhân và chân dung nghề nghiệp không?",
-    answer: "Có. HEONA MEDIA cung cấp dịch vụ chụp ảnh profile cá nhân và chân dung nghề nghiệp cho Doanh nhân, Chuyên gia, Diễn giả và Nghệ sĩ. Gói dịch vụ bao gồm chụp studio/văn phòng, trang điểm làm tóc, hướng dẫn tạo dáng và hậu kỳ hình ảnh cao cấp."
-  },
-  {
-    question: "HEONA MEDIA phục vụ tại các địa phương nào?",
-    answer: "HEONA MEDIA có trụ sở chính tại TP. Hồ Chí Minh và nhận triển khai dịch vụ tổ chức sự kiện, sản xuất media tại tất cả các quận huyện TP.HCM cũng như các tỉnh thành lân cận (Bình Dương, Đồng Nai, Bà Rịa - Vũng Tàu, Long An, v.v.) và toàn quốc."
-  },
-  {
-    question: "Slogan và giá trị cốt lõi của HEONA MEDIA là gì?",
-    answer: "Slogan của HEONA MEDIA là 'Tỏa sáng theo cách riêng của bạn!'. 8 giá trị cốt lõi gồm: Chân thật – Sáng tạo – Tử tế – Tự tin – Phát triển – Phụng sự – Đồng hành – Chuyên nghiệp."
-  }
-];
+export const DOMAIN = 'https://www.heonamedia.com';
 
 export const SEO: React.FC<SEOProps> = ({ 
   title, 
   description, 
-  image = 'https://heonamedia.com/images/logo.webp', 
+  image = `${DOMAIN}/images/logo.webp`,
   url = '', 
   type = 'website',
   keywords = 'Tổ chức sự kiện, Event Agency, Media Production, Livestream, Quay phim sự kiện, Xây dựng thương hiệu cá nhân, Chụp ảnh profile cá nhân, Chụp ảnh chân dung nghề nghiệp, TP.HCM, Cho thuê âm thanh ánh sáng, Heona Media',
+  robots = 'index, follow, max-image-preview:large',
   faq,
   customSchema
 }) => {
   const fullUrl = url ? `${DOMAIN}${url}` : DOMAIN;
   const fullTitle = `${title} | HEONA MEDIA`;
-  const activeFaqs = faq && faq.length > 0 ? faq : DEFAULT_FAQS;
+  const fullImage = image.startsWith('http') ? image : `${DOMAIN}${image.startsWith('/') ? image : `/${image}`}`;
 
   const pageSpecificSchemas: Array<Record<string, unknown>> = [];
 
@@ -152,8 +119,8 @@ export const SEO: React.FC<SEOProps> = ({
         "@id": `${DOMAIN}/#organization`,
         "name": "HEONA MEDIA",
         "alternateName": "CÔNG TY TNHH TRUYỀN THÔNG HEONA MEDIA",
-        "image": image,
-        "description": description,
+        "image": `${DOMAIN}/images/logo.webp`,
+        "description": "HEONA MEDIA cung cấp dịch vụ tổ chức sự kiện, sản xuất media, livestream, chụp ảnh profile và xây dựng thương hiệu cá nhân tại TP. Hồ Chí Minh.",
         "telephone": "0931 899 427",
         "email": "heonamedia@gmail.com",
         "address": {
@@ -201,18 +168,18 @@ export const SEO: React.FC<SEOProps> = ({
         },
         "inLanguage": "vi-VN"
       },
-      {
-        "@type": "FAQPage",
-        "@id": `${fullUrl}/#faq`,
-        "mainEntity": activeFaqs.map(item => ({
-          "@type": "Question",
-          "name": item.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": item.answer
-          }
-        }))
-      },
+      ...(faq && faq.length > 0 ? [{
+          "@type": "FAQPage",
+          "@id": `${fullUrl}#faq`,
+          "mainEntity": faq.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": item.answer
+            }
+          }))
+        }] : []),
       ...pageSpecificSchemas
     ]
   };
@@ -222,8 +189,7 @@ export const SEO: React.FC<SEOProps> = ({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      <meta name="robots" content="index, follow, max-image-preview:large" />
-      <meta property="csp" content="upgrade-insecure-requests" />
+      <meta name="robots" content={robots} />
       <meta name="author" content="HEONA MEDIA" />
       <meta name="geo.region" content="VN-SG" />
       <meta name="geo.placename" content="Ho Chi Minh City" />
@@ -237,7 +203,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta property="og:url" content={fullUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={fullImage} />
       <meta property="og:site_name" content="HEONA MEDIA" />
       <meta property="og:locale" content="vi_VN" />
 
@@ -246,7 +212,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={fullImage} />
 
       {/* JSON-LD Structured Data */}
       <script type="application/ld+json">
@@ -255,4 +221,3 @@ export const SEO: React.FC<SEOProps> = ({
     </Helmet>
   );
 };
-

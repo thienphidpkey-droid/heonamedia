@@ -18,6 +18,7 @@ export interface Service {
 
 export interface BlogPost {
   id: number;
+  slug: string;
   tag: string;
   title: string;
   meta: string;
